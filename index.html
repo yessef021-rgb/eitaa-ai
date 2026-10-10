@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نادی - دستیار هوشمند</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png">
+    <!-- SDK ایتا -->
+    <script src="https://developer.eitaa.com/eitaa-web-app.js"></script>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <!-- هدر -->
+        <header class="header">
+            <img src="logo.png" alt="نادی" class="logo" onerror="this.style.display='none'">
+            <div class="header-text">
+                <h1>نادی</h1>
+                <span id="status" class="status">در حال آماده‌سازی...</span>
+            </div>
+        </header>
+
+        <!-- چت -->
+        <div id="chat" class="chat">
+            <div class="welcome">
+                <img src="logo.png" alt="نادی" class="welcome-logo" onerror="this.style.display='none'">
+                <h2>سلام! من نادی هستم 👋</h2>
+                <p>هر سوالی داری بپرس، همینجام.</p>
+            </div>
+        </div>
+
+        <!-- ورودی -->
+        <div class="input-area">
+            <input type="text" id="prompt" placeholder="سوالت رو بنویس..." disabled autocomplete="off">
+            <button id="send" disabled>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
