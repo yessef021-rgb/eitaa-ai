@@ -1,52 +1,142 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نادی - دستیار هوشمند</title>
 <link rel="icon" href="logo.png">
 <link rel="manifest" href="manifest.json">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <script src="https://developer.eitaa.com/eitaa-web-app.js"></script>
 <style>
+:root {
+  --bg-gradient-1: #0f0c29;
+  --bg-gradient-2: #302b63;
+  --bg-gradient-3: #24243e;
+  --bg-gradient-4: #6a11cb;
+  --text-color: #ffffff;
+  --text-muted: rgba(255,255,255,0.6);
+  --panel-bg: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.1);
+  --input-bg: rgba(255,255,255,0.1);
+  --input-border: rgba(255,255,255,0.15);
+  --ai-msg-bg: rgba(255,255,255,0.1);
+  --ai-msg-border: rgba(255,255,255,0.15);
+  --accent-1: #a855f7;
+  --accent-2: #ec4899;
+  --font-family: Tahoma, 'Segoe UI', sans-serif;
+}
+
+body.light-theme {
+  --bg-gradient-1: #e0c3fc;
+  --bg-gradient-2: #8ec5fc;
+  --bg-gradient-3: #fbc2eb;
+  --bg-gradient-4: #a6c1ee;
+  --text-color: #1a1a2e;
+  --text-muted: rgba(0,0,0,0.6);
+  --panel-bg: rgba(255,255,255,0.5);
+  --panel-border: rgba(0,0,0,0.08);
+  --input-bg: rgba(255,255,255,0.7);
+  --input-border: rgba(0,0,0,0.1);
+  --ai-msg-bg: rgba(255,255,255,0.8);
+  --ai-msg-border: rgba(0,0,0,0.08);
+}
+
+body.font-tahoma { --font-family: Tahoma, 'Segoe UI', sans-serif; }
+body.font-vazir { --font-family: 'Vazirmatn', Tahoma, sans-serif; }
+body.font-sahel { --font-family: 'Sahel', Tahoma, sans-serif; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: Tahoma, 'Segoe UI', sans-serif; height: 100vh; overflow: hidden; background: #0f0c29; color: #fff; }
-.background { position: fixed; inset: 0; background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #6a11cb); background-size: 400% 400%; animation: gradientMove 15s ease infinite; z-index: -1; }
+body { font-family: var(--font-family); height: 100vh; overflow: hidden; background: var(--bg-gradient-1); color: var(--text-color); transition: color 0.4s; }
+.background { position: fixed; inset: 0; background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4)); background-size: 400% 400%; animation: gradientMove 15s ease infinite; z-index: -1; transition: background 0.5s; }
 @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
 .container { display: flex; flex-direction: column; height: 100vh; max-width: 700px; margin: 0 auto; }
-.header { display: flex; align-items: center; gap: 12px; padding: 15px 20px; background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
-.logo { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 20px rgba(138,43,226,0.6); border: 2px solid rgba(255,255,255,0.2); }
-.header-text h1 { font-size: 18px; font-weight: bold; background: linear-gradient(90deg, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.status { font-size: 12px; color: rgba(255,255,255,0.6); }
-.chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+
+/* هدر */
+.header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--panel-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--panel-border); }
+.logo { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 20px rgba(138,43,226,0.6); border: 2px solid var(--panel-border); }
+.header-text { flex: 1; }
+.header-text h1 { font-size: 17px; font-weight: bold; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.status { font-size: 11px; color: var(--text-muted); display: block; }
+.menu-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--panel-bg); border: 1px solid var(--panel-border); color: var(--text-color); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0; }
+.menu-btn:hover { background: rgba(168,85,247,0.3); }
+
+/* منوی تنظیمات */
+.settings-panel { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: var(--panel-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-left: 1px solid var(--panel-border); z-index: 100; transition: right 0.35s ease; overflow-y: auto; padding: 20px; }
+.settings-panel.open { right: 0; }
+.settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
+.settings-overlay.open { display: block; }
+.settings-title { font-size: 16px; font-weight: bold; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--panel-border); color: var(--text-color); }
+.settings-group { margin-bottom: 22px; }
+.settings-label { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; display: block; }
+.settings-options { display: flex; flex-direction: column; gap: 8px; }
+.settings-option { padding: 10px 14px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 12px; color: var(--text-color); cursor: pointer; font-family: inherit; font-size: 13px; text-align: right; transition: all 0.2s; display: flex; align-items: center; justify-content: space-between; }
+.settings-option:hover { background: rgba(168,85,247,0.2); }
+.settings-option.active { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; border-color: transparent; }
+.settings-option .check { opacity: 0; font-size: 16px; }
+.settings-option.active .check { opacity: 1; }
+
+.about-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--panel-border); }
+.about-title { font-size: 13px; font-weight: bold; margin-bottom: 10px; color: var(--text-color); }
+.about-text { font-size: 12px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+.about-link { display: block; padding: 10px 14px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 12px; color: var(--text-color); text-decoration: none; font-size: 13px; margin-bottom: 8px; transition: all 0.2s; text-align: center; }
+.about-link:hover { background: rgba(168,85,247,0.2); }
+
+/* چت */
+.chat { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
 .chat::-webkit-scrollbar { width: 6px; }
-.chat::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
-.welcome { text-align: center; padding: 40px 20px; margin: auto; animation: fadeIn 0.8s ease; }
-.welcome-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 40px rgba(138,43,226,0.8); animation: float 3s ease-in-out infinite; }
-.welcome h2 { font-size: 22px; margin-bottom: 10px; background: linear-gradient(90deg, #a855f7, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.welcome p { color: rgba(255,255,255,0.6); font-size: 14px; }
+.chat::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.4); border-radius: 3px; }
+.welcome { text-align: center; padding: 30px 20px; margin: auto; animation: fadeIn 0.8s ease; }
+.welcome-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 40px rgba(168,85,247,0.8); animation: float 3s ease-in-out infinite; }
+.welcome h2 { font-size: 20px; margin-bottom: 10px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.welcome p { color: var(--text-muted); font-size: 13px; line-height: 1.8; }
+.welcome .notice { margin-top: 15px; padding: 10px; background: rgba(255,200,0,0.15); border: 1px solid rgba(255,200,0,0.3); border-radius: 10px; font-size: 11px; color: #ffd966; }
+.welcome .guide-btn { margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); border: none; border-radius: 20px; color: #fff; font-family: inherit; font-size: 13px; cursor: pointer; font-weight: bold; }
+
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.message { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.6; word-wrap: break-word; animation: messageIn 0.3s ease; white-space: pre-wrap; }
+
+.message-wrapper { display: flex; flex-direction: column; max-width: 85%; }
+.message-wrapper.user { align-self: flex-start; align-items: flex-start; }
+.message-wrapper.ai { align-self: flex-end; align-items: flex-end; }
+.message { padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.7; word-wrap: break-word; animation: messageIn 0.3s ease; white-space: pre-wrap; user-select: text; -webkit-user-select: text; }
 @keyframes messageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.message.user { align-self: flex-start; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(102,126,234,0.4); }
-.message.ai { align-self: flex-end; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.15); border-bottom-left-radius: 4px; }
+.message.user { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(102,126,234,0.4); }
+.message.ai { background: var(--ai-msg-bg); backdrop-filter: blur(10px); color: var(--text-color); border: 1px solid var(--ai-msg-border); border-bottom-left-radius: 4px; }
+.copy-btn { margin-top: 6px; padding: 4px 10px; font-size: 11px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: inherit; }
+.copy-btn:hover { background: rgba(168,85,247,0.3); color: var(--text-color); }
+.copy-btn.copied { background: rgba(34,197,94,0.3); color: #86efac; border-color: rgba(34,197,94,0.5); }
+
 .typing { display: flex; gap: 4px; padding: 4px 0; }
-.typing span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.6); animation: typing 1.4s infinite; }
+.typing span { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); animation: typing 1.4s infinite; }
 .typing span:nth-child(2) { animation-delay: 0.2s; }
 .typing span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-8px); opacity: 1; } }
-.input-area { display: flex; gap: 10px; padding: 15px 20px; background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); }
-.input-area input { flex: 1; padding: 14px 18px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 25px; color: #fff; font-family: inherit; font-size: 14px; outline: none; transition: all 0.3s; }
-.input-area input::placeholder { color: rgba(255,255,255,0.4); }
-.input-area input:focus { border-color: rgba(168,85,247,0.6); background: rgba(255,255,255,0.15); box-shadow: 0 0 20px rgba(168,85,247,0.3); }
-.input-area button { width: 48px; height: 48px; border: none; border-radius: 50%; background: linear-gradient(135deg, #a855f7, #ec4899); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(168,85,247,0.4); }
-.input-area button:hover:not(:disabled) { transform: scale(1.05); }
-.input-area button:active:not(:disabled) { transform: scale(0.95); }
-.input-area button:disabled { background: rgba(255,255,255,0.1); cursor: not-allowed; box-shadow: none; }
+
+.input-area { display: flex; gap: 10px; padding: 12px 16px; background: var(--panel-bg); backdrop-filter: blur(20px); border-top: 1px solid var(--panel-border); }
+.input-area input { flex: 1; padding: 13px 18px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 25px; color: var(--text-color); font-family: inherit; font-size: 14px; outline: none; transition: all 0.3s; }
+.input-area input::placeholder { color: var(--text-muted); }
+.input-area input:focus { border-color: rgba(168,85,247,0.6); box-shadow: 0 0 20px rgba(168,85,247,0.3); }
+.input-area button { width: 46px; height: 46px; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(168,85,247,0.4); flex-shrink: 0; }
+.input-area button:disabled { background: var(--input-bg); cursor: not-allowed; box-shadow: none; }
+
+/* مودال راهنما */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--panel-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--panel-border); border-radius: 20px; padding: 25px; max-width: 500px; width: 100%; max-height: 80vh; overflow-y: auto; color: var(--text-color); }
+.modal h2 { font-size: 18px; margin-bottom: 15px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.modal p { font-size: 13px; line-height: 1.9; color: var(--text-color); margin-bottom: 10px; }
+.modal ul { margin: 10px 0; padding-right: 20px; }
+.modal li { font-size: 13px; line-height: 1.9; margin-bottom: 6px; color: var(--text-color); }
+.modal .close-btn { margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); border: none; border-radius: 12px; color: #fff; font-family: inherit; font-size: 13px; cursor: pointer; font-weight: bold; width: 100%; }
 </style>
 </head>
-<body>
+<body class="font-tahoma">
+
 <div class="background"></div>
+
+<!-- دکمه‌های هدر + هدر -->
 <div class="container">
 <header class="header">
 <img src="logo.png" alt="نادی" class="logo" onerror="this.style.display='none'">
@@ -54,14 +144,21 @@ body { font-family: Tahoma, 'Segoe UI', sans-serif; height: 100vh; overflow: hid
 <h1>نادی</h1>
 <span id="status" class="status">در حال آماده‌سازی...</span>
 </div>
+<button class="menu-btn" id="menuBtn" title="تنظیمات">⚙️</button>
 </header>
+
+<!-- چت -->
 <div id="chat" class="chat">
 <div class="welcome">
 <img src="logo.png" alt="نادی" class="welcome-logo" onerror="this.style.display='none'">
 <h2>سلام! من نادی هستم 👋</h2>
 <p>هر سوالی داری بپرس، همینجام.</p>
+<div class="notice">⚠️ بار اول مدل دانلود می‌شود (حدود ۴۰۰ مگابایت). لطفاً در Wi-Fi باشید.</div>
+<button class="guide-btn" id="guideBtn">📖 راهنمای کار با نادی</button>
 </div>
 </div>
+
+<!-- ورودی -->
 <div class="input-area">
 <input type="text" id="prompt" placeholder="سوالت رو بنویس..." disabled autocomplete="off">
 <button id="send" disabled>
@@ -72,107 +169,445 @@ body { font-family: Tahoma, 'Segoe UI', sans-serif; height: 100vh; overflow: hid
 </div>
 </div>
 
+<!-- پنل تنظیمات -->
+<div class="settings-overlay" id="settingsOverlay"></div>
+<aside class="settings-panel" id="settingsPanel">
+<div class="settings-title">⚙️ تنظیمات</div>
+
+<!-- فونت -->
+<div class="settings-group">
+<label class="settings-label">🔤 فونت</label>
+<div class="settings-options">
+<button class="settings-option active" data-font="tahoma">Tahoma <span class="check">✓</span></button>
+<button class="settings-option" data-font="vazir">وزیرمتن <span class="check">✓</span></button>
+<button class="settings-option" data-font="sahel">ساحل <span class="check">✓</span></button>
+</div>
+</div>
+
+<!-- زبان -->
+<div class="settings-group">
+<label class="settings-label">🌍 زبان</label>
+<div class="settings-options">
+<button class="settings-option active" data-lang="fa">فارسی <span class="check">✓</span></button>
+<button class="settings-option" data-lang="ar">العربية <span class="check">✓</span></button>
+<button class="settings-option" data-lang="en">English <span class="check">✓</span></button>
+</div>
+</div>
+
+<!-- تم -->
+<div class="settings-group">
+<label class="settings-label">🎨 تم</label>
+<div class="settings-options">
+<button class="settings-option active" data-theme="dark">🌙 شب <span class="check">✓</span></button>
+<button class="settings-option" data-theme="light">☀️ روز <span class="check">✓</span></button>
+</div>
+</div>
+
+<!-- درباره -->
+<div class="about-section">
+<div class="about-title">👨‍💻 سازنده</div>
+<div class="about-text">این برنامه توسط تیم Cuteplus ساخته شده است.</div>
+<a href="https://eitaa.com/Cuteplus" class="about-link" target="_blank">📱 آیدی ایتا: @Cuteplus</a>
+<div class="about-title" style="margin-top: 15px;">📢 کانال</div>
+<a href="https://eitaa.com/Kiyotplase" class="about-link" target="_blank">🔗 عضویت در کانال</a>
+</div>
+</aside>
+
+<!-- مودال راهنما -->
+<div class="modal-overlay" id="guideModal">
+<div class="modal">
+<h2>📖 راهنمای کار با نادی</h2>
+<p><strong>۱. شروع:</strong> بعد از باز شدن صفحه، صبر کن تا مدل دانلود شود (فقط بار اول).</p>
+<p><strong>۲. سوال پرسیدن:</strong> توی باکس پایین، سوالت رو به فارسی بنویس و دکمه ارسال رو بزن.</p>
+<p><strong>۳. کپی جواب:</strong> زیر هر جواب نادی، دکمه «📋 کپی» هست. بزن تا کل متن کپی بشه.</p>
+<p><strong>۴. انتخاب بخشی از متن:</strong> می‌تونی با انگشت، بخشی از جواب رو نگه داری و انتخاب کنی.</p>
+<p><strong>۵. تنظیمات:</strong> با دکمه ⚙️ بالا سمت چپ می‌تونی فونت، زبان و تم رو عوض کنی.</p>
+<p><strong>۶. زبان‌ها:</strong> نادی می‌تونه فارسی، عربی و انگلیسی جواب بده.</p>
+<p><strong>۷. نکته مهم:</strong> هر بار که برنامه رو باز کنی، مدل از نو دانلود می‌شه (محدودیت WebView ایتا). پس اول کار در Wi-Fi باش.</p>
+<button class="close-btn" id="closeGuide">فهمیدم ✅</button>
+</div>
+</div>
+
 <script type="module">
 import { CreateMLCEngine } from 'https://esm.run/@mlc-ai/web-llm@0.2.79';
 
-const MODEL_ID = 'SmolLM2-360M-Instruct-q4f16_1-MLC';
+const MODEL_ID = 'Qwen2.5-0.5B-Instruct-q4f16_1-MLC';
+
 const statusEl = document.getElementById('status');
 const chatEl = document.getElementById('chat');
 const promptEl = document.getElementById('prompt');
 const sendBtn = document.getElementById('send');
+const menuBtn = document.getElementById('menuBtn');
+const settingsPanel = document.getElementById('settingsPanel');
+const settingsOverlay = document.getElementById('settingsOverlay');
+const guideBtn = document.getElementById('guideBtn');
+const guideModal = document.getElementById('guideModal');
+const closeGuide = document.getElementById('closeGuide');
+const htmlRoot = document.getElementById('htmlRoot');
 
 let engine = null;
 let isFirstMessage = true;
+let currentLang = 'fa';
+let currentTheme = 'dark';
+let currentFont = 'tahoma';
+
+// ============ تنظیمات چندزبانه ============
+const TRANSLATIONS = {
+  fa: {
+    dir: 'rtl', title: 'نادی', status_init: 'در حال آماده‌سازی...',
+    status_download: 'دانلود مدل: ', status_ready: 'آماده‌ام! بپرس ✨',
+    status_error: 'خطا در بارگذاری', status_no_gpu: 'مرورگر شما از WebGPU پشتیبانی نمی‌کند',
+    welcome_title: 'سلام! من نادی هستم 👋', welcome_text: 'هر سوالی داری بپرس، همینجام.',
+    welcome_notice: '⚠️ بار اول مدل دانلود می‌شود (حدود ۴۰۰ مگابایت). لطفاً در Wi-Fi باشید.',
+    guide_btn: '📖 راهنمای کار با نادی', placeholder: 'سوالت رو بنویس...',
+    copy: '📋 کپی', copied: '✅ کپی شد', copy_error: '❌ خطا',
+    settings_title: '⚙️ تنظیمات', font_label: '🔤 فونت', lang_label: '🌍 زبان',
+    theme_label: '🎨 تم', theme_dark: '🌙 شب', theme_light: '☀️ روز',
+    about_creator: '👨‍💻 سازنده', about_text: 'این برنامه توسط تیم Cuteplus ساخته شده است.',
+    about_creator_link: '📱 آیدی ایتا: @Cuteplus', about_channel: '📢 کانال',
+    about_channel_link: '🔗 عضویت در کانال',
+    guide_title: '📖 راهنمای کار با نادی',
+    guide_p1: '۱. شروع: بعد از باز شدن صفحه، صبر کن تا مدل دانلود شود (فقط بار اول).',
+    guide_p2: '۲. سوال پرسیدن: توی باکس پایین، سوالت رو بنویس و دکمه ارسال رو بزن.',
+    guide_p3: '۳. کپی جواب: زیر هر جواب نادی، دکمه «📋 کپی» هست. بزن تا کل متن کپی بشه.',
+    guide_p4: '۴. انتخاب بخشی از متن: می‌تونی با انگشت، بخشی از جواب رو نگه داری و انتخاب کنی.',
+    guide_p5: '۵. تنظیمات: با دکمه ⚙️ بالا می‌تونی فونت، زبان و تم رو عوض کنی.',
+    guide_p6: '۶. زبان‌ها: نادی می‌تونه فارسی، عربی و انگلیسی جواب بده.',
+    guide_p7: '۷. نکته مهم: هر بار برنامه رو باز کنی، مدل از نو دانلود می‌شه. پس اول کار در Wi-Fi باش.',
+    guide_close: 'فهمیدم ✅',
+    system_prompt: 'شما "نادی" هستید، یک دستیار هوشمند فارسی‌زبان. قوانین: ۱) همیشه فقط به زبان فارسی پاسخ دهید. ۲) پاسخ‌ها کوتاه، دوستانه و مفید باشند. ۳) هرگز خود را شخص دیگری معرفی نکنید.'
+  },
+  ar: {
+    dir: 'rtl', title: 'نادي', status_init: 'جاري التحضير...',
+    status_download: 'تحميل النموذج: ', status_ready: 'أنا جاهز! اسألني ✨',
+    status_error: 'خطأ في التحميل', status_no_gpu: 'متصفحك لا يدعم WebGPU',
+    welcome_title: 'مرحباً! أنا نادي 👋', welcome_text: 'اسألني أي شيء، أنا هنا.',
+    welcome_notice: '⚠️ في المرة الأولى يتم تحميل النموذج (حوالي 400 ميجابايت). يرجى استخدام Wi-Fi.',
+    guide_btn: '📖 دليل استخدام نادي', placeholder: 'اكتب سؤالك...',
+    copy: '📋 نسخ', copied: '✅ تم النسخ', copy_error: '❌ خطأ',
+    settings_title: '⚙️ الإعدادات', font_label: '🔤 الخط', lang_label: '🌍 اللغة',
+    theme_label: '🎨 السمة', theme_dark: '🌙 ليلي', theme_light: '☀️ نهاري',
+    about_creator: '👨‍💻 المطور', about_text: 'تم تطوير هذا التطبيق بواسطة فريق Cuteplus.',
+    about_creator_link: '📱 معرف ايتا: @Cuteplus', about_channel: '📢 القناة',
+    about_channel_link: '🔗 انضم إلى القناة',
+    guide_title: '📖 دليل استخدام نادي',
+    guide_p1: '١. البداية: بعد فتح الصفحة، انتظر تحميل النموذج (المرة الأولى فقط).',
+    guide_p2: '٢. طرح السؤال: اكتب سؤالك في الصندوق أدناه واضغط على زر الإرسال.',
+    guide_p3: '٣. نسخ الرد: تحت كل رد، يوجد زر «📋 نسخ». اضغط عليه لنسخ النص.',
+    guide_p4: '٤. تحديد جزء من النص: يمكنك الضغط مطولاً على أي جزء لتحديده.',
+    guide_p5: '٥. الإعدادات: اضغط على زر ⚙️ لتغيير الخط واللغة والسمة.',
+    guide_p6: '٦. اللغات: نادي يتحدث العربية والفارسية والإنجليزية.',
+    guide_p7: '٧. ملاحظة مهمة: في كل مرة تفتح التطبيق، يتم إعادة تحميل النموذج.',
+    guide_close: 'فهمت ✅',
+    system_prompt: 'أنت "نادي"، مساعد ذكي. القواعد: ١) أجب دائماً بالعربية فقط. ٢) الردود قصيرة وودية ومفيدة. ٣) لا تقدم نفسك كشخص آخر.'
+  },
+  en: {
+    dir: 'ltr', title: 'Nadi', status_init: 'Initializing...',
+    status_download: 'Downloading model: ', status_ready: 'Ready! Ask me ✨',
+    status_error: 'Loading error', status_no_gpu: 'Your browser does not support WebGPU',
+    welcome_title: 'Hi! I am Nadi 👋', welcome_text: 'Ask me anything, I am here.',
+    welcome_notice: '⚠️ First time the model downloads (~400 MB). Please use Wi-Fi.',
+    guide_btn: '📖 How to use Nadi', placeholder: 'Type your question...',
+    copy: '📋 Copy', copied: '✅ Copied', copy_error: '❌ Error',
+    settings_title: '⚙️ Settings', font_label: '🔤 Font', lang_label: '🌍 Language',
+    theme_label: '🎨 Theme', theme_dark: '🌙 Dark', theme_light: '☀️ Light',
+    about_creator: '👨‍💻 Developer', about_text: 'This app is made by Cuteplus team.',
+    about_creator_link: '📱 Eitaa ID: @Cuteplus', about_channel: '📢 Channel',
+    about_channel_link: '🔗 Join Channel',
+    guide_title: '📖 How to use Nadi',
+    guide_p1: '1. Start: After page opens, wait for the model to download (first time only).',
+    guide_p2: '2. Ask: Type your question in the box below and press send.',
+    guide_p3: '3. Copy answer: Below each answer, tap «📋 Copy» to copy the text.',
+    guide_p4: '4. Select text: Long-press on any part to select it.',
+    guide_p5: '5. Settings: Tap ⚙️ to change font, language and theme.',
+    guide_p6: '6. Languages: Nadi speaks Persian, Arabic and English.',
+    guide_p7: '7. Note: Each time you open the app, the model re-downloads.',
+    guide_close: 'Got it ✅',
+    system_prompt: 'You are "Nadi", a smart assistant. Rules: 1) Always answer in English only. 2) Answers should be short, friendly and helpful. 3) Never introduce yourself as someone else.'
+  }
+};
+
+function t(key) {
+  return TRANSLATIONS[currentLang][key] || key;
+}
+
+// ============ اعمال زبان ============
+function applyLanguage() {
+  const lang = TRANSLATIONS[currentLang];
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = lang.dir;
+  document.body.style.direction = lang.dir;
+  
+  // هدر
+  document.querySelector('.header-text h1').textContent = lang.title;
+  if (engine) statusEl.textContent = lang.status_ready;
+  
+  // خوش‌آمد (اگه هنوز نمایش داده می‌شه)
+  const welcome = chatEl.querySelector('.welcome');
+  if (welcome) {
+    welcome.querySelector('h2').textContent = lang.welcome_title;
+    welcome.querySelector('p').textContent = lang.welcome_text;
+    welcome.querySelector('.notice').textContent = lang.welcome_notice;
+    welcome.querySelector('.guide-btn').textContent = lang.guide_btn;
+  }
+  
+  // ورودی
+  promptEl.placeholder = lang.placeholder;
+  
+  // تنظیمات
+  document.querySelector('.settings-title').textContent = lang.settings_title;
+  document.querySelectorAll('.settings-label')[0].textContent = lang.font_label;
+  document.querySelectorAll('.settings-label')[1].textContent = lang.lang_label;
+  document.querySelectorAll('.settings-label')[2].textContent = lang.theme_label;
+  
+  // دکمه‌های تم
+  const themeBtns = document.querySelectorAll('[data-theme]');
+  themeBtns[0].innerHTML = lang.theme_dark + ' <span class="check">✓</span>';
+  themeBtns[1].innerHTML = lang.theme_light + ' <span class="check">✓</span>';
+  
+  // درباره
+  const aboutTitles = document.querySelectorAll('.about-title');
+  aboutTitles[0].textContent = lang.about_creator;
+  document.querySelector('.about-text').textContent = lang.about_text;
+  document.querySelectorAll('.about-link')[0].textContent = lang.about_creator_link;
+  aboutTitles[1].textContent = lang.about_channel;
+  document.querySelectorAll('.about-link')[1].textContent = lang.about_channel_link;
+  
+  // راهنما
+  document.querySelector('.modal h2').textContent = lang.guide_title;
+  const pTags = document.querySelectorAll('.modal p');
+  if (pTags.length >= 7) {
+    pTags[0].textContent = lang.guide_p1;
+    pTags[1].textContent = lang.guide_p2;
+    pTags[2].textContent = lang.guide_p3;
+    pTags[3].textContent = lang.guide_p4;
+    pTags[4].textContent = lang.guide_p5;
+    pTags[5].textContent = lang.guide_p6;
+    pTags[6].textContent = lang.guide_p7;
+  }
+  document.getElementById('closeGuide').textContent = lang.guide_close;
+  
+  // آپدیت system prompt اگه موتور لود شده
+  if (chatHistory[0]) {
+    chatHistory[0].content = lang.system_prompt;
+  }
+}
+
+// ============ چت ============
 const chatHistory = [
-{ role: 'system', content: 'تو نادی هستی، یک دستیار هوشمند فارسی‌زبان. دوستانه، کوتاه و مفید جواب بده. همیشه فارسی جواب بده.' }
+  { role: 'system', content: TRANSLATIONS[currentLang].system_prompt }
 ];
 
+// ============ مقداردهی اولیه ============
 async function init() {
-if (typeof window.Eitaa?.WebApp !== 'undefined') {
-window.Eitaa.WebApp.ready();
-console.log('SDK ایتا فعال شد');
-}
-if (!navigator.gpu) {
-statusEl.textContent = 'مرورگر شما از WebGPU پشتیبانی نمی‌کند';
-return;
-}
-try {
-statusEl.textContent = 'در حال دانلود مدل...';
-engine = await CreateMLCEngine(MODEL_ID, {
-initProgressCallback: (report) => {
-const pct = Math.round(report.progress * 100);
-statusEl.textContent = 'دانلود مدل: ' + pct + '%';
-}
-});
-statusEl.textContent = 'آماده‌ام! بپرس ✨';
-promptEl.disabled = false;
-sendBtn.disabled = false;
-promptEl.focus();
-} catch (err) {
-statusEl.textContent = 'خطا در بارگذاری';
-console.error(err);
-}
+  if (typeof window.Eitaa?.WebApp !== 'undefined') {
+    window.Eitaa.WebApp.ready();
+    console.log('SDK ایتا فعال شد');
+  }
+
+  // بارگذاری تنظیمات ذخیره‌شده
+  loadSettings();
+
+  // درخواست ذخیره‌سازی پایدار
+  try {
+    if (navigator.storage && navigator.storage.persist) {
+      const persisted = await navigator.storage.persist();
+      console.log('ذخیره‌سازی پایدار:', persisted);
+    }
+  } catch(e) { console.log('خطا در persist:', e); }
+
+  if (!navigator.gpu) {
+    statusEl.textContent = t('status_no_gpu');
+    return;
+  }
+
+  try {
+    statusEl.textContent = t('status_init');
+    engine = await CreateMLCEngine(MODEL_ID, {
+      initProgressCallback: (report) => {
+        const pct = Math.round(report.progress * 100);
+        statusEl.textContent = t('status_download') + pct + '%';
+      }
+    });
+    statusEl.textContent = t('status_ready');
+    promptEl.disabled = false;
+    sendBtn.disabled = false;
+    promptEl.focus();
+  } catch (err) {
+    statusEl.textContent = t('status_error');
+    console.error(err);
+  }
 }
 
+// ============ تنظیمات ============
+function loadSettings() {
+  try {
+    const saved = localStorage.getItem('nadi_settings');
+    if (saved) {
+      const s = JSON.parse(saved);
+      currentLang = s.lang || 'fa';
+      currentTheme = s.theme || 'dark';
+      currentFont = s.font || 'tahoma';
+      
+      document.body.classList.remove('font-tahoma', 'font-vazir', 'font-sahel');
+      document.body.classList.add('font-' + currentFont);
+      document.body.classList.toggle('light-theme', currentTheme === 'light');
+      
+      // آپدیت UI دکمه‌ها
+      document.querySelectorAll('[data-font]').forEach(b => b.classList.toggle('active', b.dataset.font === currentFont));
+      document.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+      document.querySelectorAll('[data-theme]').forEach(b => b.classList.toggle('active', b.dataset.theme === currentTheme));
+      
+      applyLanguage();
+    }
+  } catch(e) { console.log(e); }
+}
+
+function saveSettings() {
+  try {
+    localStorage.setItem('nadi_settings', JSON.stringify({
+      lang: currentLang, theme: currentTheme, font: currentFont
+    }));
+  } catch(e) {}
+}
+
+// ============ پیام‌ها ============
 function addMessage(text, type) {
-const msg = document.createElement('div');
-msg.className = 'message ' + type;
-msg.textContent = text;
-chatEl.appendChild(msg);
-chatEl.scrollTop = chatEl.scrollHeight;
-return msg;
+  if (isFirstMessage) {
+    const welcome = chatEl.querySelector('.welcome');
+    if (welcome) welcome.remove();
+    isFirstMessage = false;
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'message-wrapper ' + type;
+
+  const msg = document.createElement('div');
+  msg.className = 'message ' + type;
+  msg.textContent = text;
+  wrapper.appendChild(msg);
+
+  const copyBtn = document.createElement('button');
+  copyBtn.className = 'copy-btn';
+  copyBtn.textContent = t('copy');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      copyBtn.textContent = t('copied');
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = t('copy'); copyBtn.classList.remove('copied'); }, 1500);
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        copyBtn.textContent = t('copied');
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = t('copy'); copyBtn.classList.remove('copied'); }, 1500);
+      } catch (err) { copyBtn.textContent = t('copy_error'); }
+      document.body.removeChild(ta);
+    }
+  });
+  wrapper.appendChild(copyBtn);
+  chatEl.appendChild(wrapper);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return wrapper;
 }
 
 function addTyping() {
-const msg = document.createElement('div');
-msg.className = 'message ai';
-msg.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
-chatEl.appendChild(msg);
-chatEl.scrollTop = chatEl.scrollHeight;
-return msg;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'message-wrapper ai';
+  const msg = document.createElement('div');
+  msg.className = 'message ai';
+  msg.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  wrapper.appendChild(msg);
+  chatEl.appendChild(wrapper);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return wrapper;
 }
 
 async function sendMessage() {
-const text = promptEl.value.trim();
-if (!text || !engine) return;
+  const text = promptEl.value.trim();
+  if (!text || !engine) return;
 
-if (isFirstMessage) {
-const welcome = chatEl.querySelector('.welcome');
-if (welcome) welcome.remove();
-isFirstMessage = false;
+  addMessage(text, 'user');
+  promptEl.value = '';
+  sendBtn.disabled = true;
+  const typingEl = addTyping();
+
+  try {
+    chatHistory.push({ role: 'user', content: text });
+    const reply = await engine.chat.completions.create({
+      messages: chatHistory,
+      temperature: 0.7,
+      max_tokens: 400
+    });
+    const aiText = reply.choices[0].message.content;
+    chatHistory.push({ role: 'assistant', content: aiText });
+    if (chatHistory.length > 12) chatHistory.splice(1, 2);
+    typingEl.remove();
+    addMessage(aiText, 'ai');
+  } catch (err) {
+    typingEl.remove();
+    addMessage(currentLang === 'fa' ? 'متأسفم، خطایی رخ داد.' : currentLang === 'ar' ? 'عذراً، حدث خطأ.' : 'Sorry, an error occurred.', 'ai');
+    console.error(err);
+  }
+
+  sendBtn.disabled = false;
+  promptEl.focus();
 }
 
-addMessage(text, 'user');
-promptEl.value = '';
-sendBtn.disabled = true;
-const typingEl = addTyping();
-
-try {
-chatHistory.push({ role: 'user', content: text });
-const reply = await engine.chat.completions.create({
-messages: chatHistory,
-temperature: 0.7,
-max_tokens: 512
-});
-const aiText = reply.choices[0].message.content;
-chatHistory.push({ role: 'assistant', content: aiText });
-if (chatHistory.length > 12) chatHistory.splice(1, 2);
-typingEl.remove();
-addMessage(aiText, 'ai');
-} catch (err) {
-typingEl.remove();
-addMessage('متأسفم، خطایی رخ داد. دوباره امتحان کن.', 'ai');
-console.error(err);
-}
-
-sendBtn.disabled = false;
-promptEl.focus();
-}
-
+// ============ رویدادها ============
 sendBtn.addEventListener('click', sendMessage);
-promptEl.addEventListener('keypress', (e) => {
-if (e.key === 'Enter') sendMessage();
+promptEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+menuBtn.addEventListener('click', () => {
+  settingsPanel.classList.add('open');
+  settingsOverlay.classList.add('open');
 });
+settingsOverlay.addEventListener('click', () => {
+  settingsPanel.classList.remove('open');
+  settingsOverlay.classList.remove('open');
+});
+
+// فونت
+document.querySelectorAll('[data-font]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFont = btn.dataset.font;
+    document.body.classList.remove('font-tahoma', 'font-vazir', 'font-sahel');
+    document.body.classList.add('font-' + currentFont);
+    document.querySelectorAll('[data-font]').forEach(b => b.classList.toggle('active', b === btn));
+    saveSettings();
+  });
+});
+
+// زبان
+document.querySelectorAll('[data-lang]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentLang = btn.dataset.lang;
+    document.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('active', b === btn));
+    applyLanguage();
+    saveSettings();
+  });
+});
+
+// تم
+document.querySelectorAll('[data-theme]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentTheme = btn.dataset.theme;
+    document.body.classList.toggle('light-theme', currentTheme === 'light');
+    document.querySelectorAll('[data-theme]').forEach(b => b.classList.toggle('active', b === btn));
+    saveSettings();
+  });
+});
+
+// راهنما
+guideBtn.addEventListener('click', () => guideModal.classList.add('open'));
+closeGuide.addEventListener('click', () => guideModal.classList.remove('open'));
+guideModal.addEventListener('click', (e) => { if (e.target === guideModal) guideModal.classList.remove('open'); });
 
 init();
 </script>
