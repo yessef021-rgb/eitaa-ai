@@ -1,20 +1,10 @@
 {
   "name": "نادی - دستیار هوشمند",
   "short_name": "نادی",
-  "description": "دستیار هوشمند آفلاین",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f0c29",
   "theme_color": "#a855f7",
-  "orientation": "portrait",
   "lang": "fa",
-  "dir": "rtl",
-  "icons": [
-    {
-      "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+  "dir": "rtl"
 }
