@@ -26,7 +26,6 @@
   --accent-2: #ec4899;
   --font-family: Tahoma, 'Segoe UI', sans-serif;
 }
-
 body.light-theme {
   --bg-gradient-1: #e0c3fc;
   --bg-gradient-2: #8ec5fc;
@@ -41,7 +40,6 @@ body.light-theme {
   --ai-msg-bg: rgba(255,255,255,0.8);
   --ai-msg-border: rgba(0,0,0,0.08);
 }
-
 body.font-tahoma { --font-family: Tahoma, 'Segoe UI', sans-serif; }
 body.font-vazir { --font-family: 'Vazirmatn', Tahoma, sans-serif; }
 body.font-sahel { --font-family: 'Sahel', Tahoma, sans-serif; }
@@ -52,8 +50,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
 .container { display: flex; flex-direction: column; height: 100vh; max-width: 700px; margin: 0 auto; }
-
-/* هدر */
 .header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--panel-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--panel-border); }
 .logo { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 20px rgba(138,43,226,0.6); border: 2px solid var(--panel-border); }
 .header-text { flex: 1; }
@@ -62,7 +58,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 .menu-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--panel-bg); border: 1px solid var(--panel-border); color: var(--text-color); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0; }
 .menu-btn:hover { background: rgba(168,85,247,0.3); }
 
-/* منوی تنظیمات */
 .settings-panel { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: var(--panel-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-left: 1px solid var(--panel-border); z-index: 100; transition: right 0.35s ease; overflow-y: auto; padding: 20px; }
 .settings-panel.open { right: 0; }
 .settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; display: none; }
@@ -76,14 +71,12 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 .settings-option.active { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; border-color: transparent; }
 .settings-option .check { opacity: 0; font-size: 16px; }
 .settings-option.active .check { opacity: 1; }
-
 .about-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--panel-border); }
 .about-title { font-size: 13px; font-weight: bold; margin-bottom: 10px; color: var(--text-color); }
 .about-text { font-size: 12px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
 .about-link { display: block; padding: 10px 14px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 12px; color: var(--text-color); text-decoration: none; font-size: 13px; margin-bottom: 8px; transition: all 0.2s; text-align: center; }
 .about-link:hover { background: rgba(168,85,247,0.2); }
 
-/* چت */
 .chat { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
 .chat::-webkit-scrollbar { width: 6px; }
 .chat::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.4); border-radius: 3px; }
@@ -107,7 +100,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 .copy-btn { margin-top: 6px; padding: 4px 10px; font-size: 11px; background: var(--input-bg); border: 1px solid var(--input-border); border-radius: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: inherit; }
 .copy-btn:hover { background: rgba(168,85,247,0.3); color: var(--text-color); }
 .copy-btn.copied { background: rgba(34,197,94,0.3); color: #86efac; border-color: rgba(34,197,94,0.5); }
-
 .typing { display: flex; gap: 4px; padding: 4px 0; }
 .typing span { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); animation: typing 1.4s infinite; }
 .typing span:nth-child(2) { animation-delay: 0.2s; }
@@ -121,7 +113,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 .input-area button { width: 46px; height: 46px; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(168,85,247,0.4); flex-shrink: 0; }
 .input-area button:disabled { background: var(--input-bg); cursor: not-allowed; box-shadow: none; }
 
-/* مودال راهنما */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
 .modal-overlay.open { display: flex; }
 .modal { background: var(--panel-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--panel-border); border-radius: 20px; padding: 25px; max-width: 500px; width: 100%; max-height: 80vh; overflow-y: auto; color: var(--text-color); }
@@ -133,10 +124,7 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 </style>
 </head>
 <body class="font-tahoma">
-
 <div class="background"></div>
-
-<!-- دکمه‌های هدر + هدر -->
 <div class="container">
 <header class="header">
 <img src="logo.png" alt="نادی" class="logo" onerror="this.style.display='none'">
@@ -147,18 +135,15 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 <button class="menu-btn" id="menuBtn" title="تنظیمات">⚙️</button>
 </header>
 
-<!-- چت -->
 <div id="chat" class="chat">
 <div class="welcome">
 <img src="logo.png" alt="نادی" class="welcome-logo" onerror="this.style.display='none'">
 <h2>سلام! من نادی هستم 👋</h2>
 <p>هر سوالی داری بپرس، همینجام.</p>
-<div class="notice">⚠️ بار اول مدل دانلود می‌شود (حدود ۴۰۰ مگابایت). لطفاً در Wi-Fi باشید.</div>
 <button class="guide-btn" id="guideBtn">📖 راهنمای کار با نادی</button>
 </div>
 </div>
 
-<!-- ورودی -->
 <div class="input-area">
 <input type="text" id="prompt" placeholder="سوالت رو بنویس..." disabled autocomplete="off">
 <button id="send" disabled>
@@ -169,12 +154,9 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 </div>
 </div>
 
-<!-- پنل تنظیمات -->
 <div class="settings-overlay" id="settingsOverlay"></div>
 <aside class="settings-panel" id="settingsPanel">
 <div class="settings-title">⚙️ تنظیمات</div>
-
-<!-- فونت -->
 <div class="settings-group">
 <label class="settings-label">🔤 فونت</label>
 <div class="settings-options">
@@ -183,8 +165,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 <button class="settings-option" data-font="sahel">ساحل <span class="check">✓</span></button>
 </div>
 </div>
-
-<!-- زبان -->
 <div class="settings-group">
 <label class="settings-label">🌍 زبان</label>
 <div class="settings-options">
@@ -193,8 +173,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 <button class="settings-option" data-lang="en">English <span class="check">✓</span></button>
 </div>
 </div>
-
-<!-- تم -->
 <div class="settings-group">
 <label class="settings-label">🎨 تم</label>
 <div class="settings-options">
@@ -202,8 +180,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 <button class="settings-option" data-theme="light">☀️ روز <span class="check">✓</span></button>
 </div>
 </div>
-
-<!-- درباره -->
 <div class="about-section">
 <div class="about-title">👨‍💻 سازنده</div>
 <div class="about-text">این برنامه توسط تیم Cuteplus ساخته شده است.</div>
@@ -213,7 +189,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 </div>
 </aside>
 
-<!-- مودال راهنما -->
 <div class="modal-overlay" id="guideModal">
 <div class="modal">
 <h2>📖 راهنمای کار با نادی</h2>
@@ -229,9 +204,12 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 </div>
 
 <script type="module">
-import { CreateMLCEngine } from 'https://esm.run/@mlc-ai/web-llm@0.2.79';
-
-const MODEL_ID = 'Qwen2.5-0.5B-Instruct-q4f16_1-MLC';
+// ============================================
+// ⚠️ تنظیمات API - کلید خود را اینجا قرار دهید
+// ============================================
+const OPENROUTER_API_KEY = 'YOUR_OPENROUTER_API_KEY'; // 🔑 کلید API خود را از openrouter.ai دریافت کنید
+const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const MODEL_NAME = 'deepseek/deepseek-chat:free'; // مدل رایگان DeepSeek در OpenRouter
 
 const statusEl = document.getElementById('status');
 const chatEl = document.getElementById('chat');
@@ -245,18 +223,16 @@ const guideModal = document.getElementById('guideModal');
 const closeGuide = document.getElementById('closeGuide');
 const htmlRoot = document.getElementById('htmlRoot');
 
-let engine = null;
 let isFirstMessage = true;
+let isProcessing = false;
 let currentLang = 'fa';
 let currentTheme = 'dark';
 let currentFont = 'tahoma';
 
-// ============ تنظیمات چندزبانه ============
 const TRANSLATIONS = {
   fa: {
-    dir: 'rtl', title: 'نادی', status_init: 'در حال آماده‌سازی...',
-    status_download: 'دانلود مدل: ', status_ready: 'آماده‌ام! بپرس ✨',
-    status_error: 'خطا در بارگذاری', status_no_gpu: 'مرورگر شما از WebGPU پشتیبانی نمی‌کند',
+    dir: 'rtl', title: 'نادی', status_ready: 'آماده‌ام! بپرس ✨',
+    status_thinking: 'در حال فکر کردن...', status_error: 'خطا در اتصال',
     welcome_title: 'سلام! من نادی هستم 👋', welcome_text: 'هر سوالی داری بپرس، همینجام.',
     welcome_notice: '⚠️ بار اول مدل دانلود می‌شود (حدود ۴۰۰ مگابایت). لطفاً در Wi-Fi باشید.',
     guide_btn: '📖 راهنمای کار با نادی', placeholder: 'سوالت رو بنویس...',
@@ -278,9 +254,8 @@ const TRANSLATIONS = {
     system_prompt: 'شما "نادی" هستید، یک دستیار هوشمند فارسی‌زبان. قوانین: ۱) همیشه فقط به زبان فارسی پاسخ دهید. ۲) پاسخ‌ها کوتاه، دوستانه و مفید باشند. ۳) هرگز خود را شخص دیگری معرفی نکنید.'
   },
   ar: {
-    dir: 'rtl', title: 'نادي', status_init: 'جاري التحضير...',
-    status_download: 'تحميل النموذج: ', status_ready: 'أنا جاهز! اسألني ✨',
-    status_error: 'خطأ في التحميل', status_no_gpu: 'متصفحك لا يدعم WebGPU',
+    dir: 'rtl', title: 'نادي', status_ready: 'أنا جاهز! اسألني ✨',
+    status_thinking: 'أفكر...', status_error: 'خطأ في الاتصال',
     welcome_title: 'مرحباً! أنا نادي 👋', welcome_text: 'اسألني أي شيء، أنا هنا.',
     welcome_notice: '⚠️ في المرة الأولى يتم تحميل النموذج (حوالي 400 ميجابايت). يرجى استخدام Wi-Fi.',
     guide_btn: '📖 دليل استخدام نادي', placeholder: 'اكتب سؤالك...',
@@ -302,9 +277,8 @@ const TRANSLATIONS = {
     system_prompt: 'أنت "نادي"، مساعد ذكي. القواعد: ١) أجب دائماً بالعربية فقط. ٢) الردود قصيرة وودية ومفيدة. ٣) لا تقدم نفسك كشخص آخر.'
   },
   en: {
-    dir: 'ltr', title: 'Nadi', status_init: 'Initializing...',
-    status_download: 'Downloading model: ', status_ready: 'Ready! Ask me ✨',
-    status_error: 'Loading error', status_no_gpu: 'Your browser does not support WebGPU',
+    dir: 'ltr', title: 'Nadi', status_ready: 'Ready! Ask me ✨',
+    status_thinking: 'Thinking...', status_error: 'Connection error',
     welcome_title: 'Hi! I am Nadi 👋', welcome_text: 'Ask me anything, I am here.',
     welcome_notice: '⚠️ First time the model downloads (~400 MB). Please use Wi-Fi.',
     guide_btn: '📖 How to use Nadi', placeholder: 'Type your question...',
@@ -326,54 +300,37 @@ const TRANSLATIONS = {
     system_prompt: 'You are "Nadi", a smart assistant. Rules: 1) Always answer in English only. 2) Answers should be short, friendly and helpful. 3) Never introduce yourself as someone else.'
   }
 };
+function t(key) { return TRANSLATIONS[currentLang][key] || key; }
 
-function t(key) {
-  return TRANSLATIONS[currentLang][key] || key;
-}
-
-// ============ اعمال زبان ============
 function applyLanguage() {
   const lang = TRANSLATIONS[currentLang];
   document.documentElement.lang = currentLang;
   document.documentElement.dir = lang.dir;
   document.body.style.direction = lang.dir;
-  
-  // هدر
   document.querySelector('.header-text h1').textContent = lang.title;
-  if (engine) statusEl.textContent = lang.status_ready;
-  
-  // خوش‌آمد (اگه هنوز نمایش داده می‌شه)
+  if (statusEl.textContent !== t('status_thinking')) statusEl.textContent = lang.status_ready;
   const welcome = chatEl.querySelector('.welcome');
   if (welcome) {
     welcome.querySelector('h2').textContent = lang.welcome_title;
     welcome.querySelector('p').textContent = lang.welcome_text;
-    welcome.querySelector('.notice').textContent = lang.welcome_notice;
+    const notice = welcome.querySelector('.notice');
+    if (notice) notice.textContent = lang.welcome_notice;
     welcome.querySelector('.guide-btn').textContent = lang.guide_btn;
   }
-  
-  // ورودی
   promptEl.placeholder = lang.placeholder;
-  
-  // تنظیمات
   document.querySelector('.settings-title').textContent = lang.settings_title;
   document.querySelectorAll('.settings-label')[0].textContent = lang.font_label;
   document.querySelectorAll('.settings-label')[1].textContent = lang.lang_label;
   document.querySelectorAll('.settings-label')[2].textContent = lang.theme_label;
-  
-  // دکمه‌های تم
   const themeBtns = document.querySelectorAll('[data-theme]');
   themeBtns[0].innerHTML = lang.theme_dark + ' <span class="check">✓</span>';
   themeBtns[1].innerHTML = lang.theme_light + ' <span class="check">✓</span>';
-  
-  // درباره
   const aboutTitles = document.querySelectorAll('.about-title');
   aboutTitles[0].textContent = lang.about_creator;
   document.querySelector('.about-text').textContent = lang.about_text;
   document.querySelectorAll('.about-link')[0].textContent = lang.about_creator_link;
   aboutTitles[1].textContent = lang.about_channel;
   document.querySelectorAll('.about-link')[1].textContent = lang.about_channel_link;
-  
-  // راهنما
   document.querySelector('.modal h2').textContent = lang.guide_title;
   const pTags = document.querySelectorAll('.modal p');
   if (pTags.length >= 7) {
@@ -386,60 +343,31 @@ function applyLanguage() {
     pTags[6].textContent = lang.guide_p7;
   }
   document.getElementById('closeGuide').textContent = lang.guide_close;
-  
-  // آپدیت system prompt اگه موتور لود شده
-  if (chatHistory[0]) {
-    chatHistory[0].content = lang.system_prompt;
-  }
 }
 
-// ============ چت ============
-const chatHistory = [
-  { role: 'system', content: TRANSLATIONS[currentLang].system_prompt }
-];
+const chatHistory = [];
 
-// ============ مقداردهی اولیه ============
 async function init() {
   if (typeof window.Eitaa?.WebApp !== 'undefined') {
     window.Eitaa.WebApp.ready();
     console.log('SDK ایتا فعال شد');
   }
-
-  // بارگذاری تنظیمات ذخیره‌شده
   loadSettings();
 
-  // درخواست ذخیره‌سازی پایدار
-  try {
-    if (navigator.storage && navigator.storage.persist) {
-      const persisted = await navigator.storage.persist();
-      console.log('ذخیره‌سازی پایدار:', persisted);
-    }
-  } catch(e) { console.log('خطا در persist:', e); }
-
-  if (!navigator.gpu) {
-    statusEl.textContent = t('status_no_gpu');
+  // بررسی تنظیمات API
+  if (OPENROUTER_API_KEY === 'YOUR_OPENROUTER_API_KEY' || !OPENROUTER_API_KEY) {
+    statusEl.textContent = currentLang === 'fa' ? 'کلید API تنظیم نشده' : currentLang === 'ar' ? 'مفتاح API غير مُعد' : 'API Key not set';
+    promptEl.disabled = true;
+    sendBtn.disabled = true;
     return;
   }
 
-  try {
-    statusEl.textContent = t('status_init');
-    engine = await CreateMLCEngine(MODEL_ID, {
-      initProgressCallback: (report) => {
-        const pct = Math.round(report.progress * 100);
-        statusEl.textContent = t('status_download') + pct + '%';
-      }
-    });
-    statusEl.textContent = t('status_ready');
-    promptEl.disabled = false;
-    sendBtn.disabled = false;
-    promptEl.focus();
-  } catch (err) {
-    statusEl.textContent = t('status_error');
-    console.error(err);
-  }
+  statusEl.textContent = t('status_ready');
+  promptEl.disabled = false;
+  sendBtn.disabled = false;
+  promptEl.focus();
 }
 
-// ============ تنظیمات ============
 function loadSettings() {
   try {
     const saved = localStorage.getItem('nadi_settings');
@@ -448,45 +376,32 @@ function loadSettings() {
       currentLang = s.lang || 'fa';
       currentTheme = s.theme || 'dark';
       currentFont = s.font || 'tahoma';
-      
       document.body.classList.remove('font-tahoma', 'font-vazir', 'font-sahel');
       document.body.classList.add('font-' + currentFont);
       document.body.classList.toggle('light-theme', currentTheme === 'light');
-      
-      // آپدیت UI دکمه‌ها
       document.querySelectorAll('[data-font]').forEach(b => b.classList.toggle('active', b.dataset.font === currentFont));
       document.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
       document.querySelectorAll('[data-theme]').forEach(b => b.classList.toggle('active', b.dataset.theme === currentTheme));
-      
       applyLanguage();
     }
   } catch(e) { console.log(e); }
 }
-
 function saveSettings() {
-  try {
-    localStorage.setItem('nadi_settings', JSON.stringify({
-      lang: currentLang, theme: currentTheme, font: currentFont
-    }));
-  } catch(e) {}
+  try { localStorage.setItem('nadi_settings', JSON.stringify({ lang: currentLang, theme: currentTheme, font: currentFont })); } catch(e) {}
 }
 
-// ============ پیام‌ها ============
 function addMessage(text, type) {
   if (isFirstMessage) {
     const welcome = chatEl.querySelector('.welcome');
     if (welcome) welcome.remove();
     isFirstMessage = false;
   }
-
   const wrapper = document.createElement('div');
   wrapper.className = 'message-wrapper ' + type;
-
   const msg = document.createElement('div');
   msg.className = 'message ' + type;
   msg.textContent = text;
   wrapper.appendChild(msg);
-
   const copyBtn = document.createElement('button');
   copyBtn.className = 'copy-btn';
   copyBtn.textContent = t('copy');
@@ -498,16 +413,9 @@ function addMessage(text, type) {
       setTimeout(() => { copyBtn.textContent = t('copy'); copyBtn.classList.remove('copied'); }, 1500);
     } catch (e) {
       const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand('copy');
-        copyBtn.textContent = t('copied');
-        copyBtn.classList.add('copied');
-        setTimeout(() => { copyBtn.textContent = t('copy'); copyBtn.classList.remove('copied'); }, 1500);
-      } catch (err) { copyBtn.textContent = t('copy_error'); }
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); copyBtn.textContent = t('copied'); copyBtn.classList.add('copied'); setTimeout(() => { copyBtn.textContent = t('copy'); copyBtn.classList.remove('copied'); }, 1500); } catch (err) { copyBtn.textContent = t('copy_error'); }
       document.body.removeChild(ta);
     }
   });
@@ -531,49 +439,93 @@ function addTyping() {
 
 async function sendMessage() {
   const text = promptEl.value.trim();
-  if (!text || !engine) return;
+  if (!text || isProcessing) return;
 
   addMessage(text, 'user');
   promptEl.value = '';
   sendBtn.disabled = true;
+  isProcessing = true;
+  statusEl.textContent = t('status_thinking');
+
   const typingEl = addTyping();
 
+  chatHistory.push({ role: 'user', content: text });
+
   try {
-    chatHistory.push({ role: 'user', content: text });
-    const reply = await engine.chat.completions.create({
-      messages: chatHistory,
-      temperature: 0.7,
-      max_tokens: 400
+    const response = await fetch(OPENROUTER_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.href,
+        'X-Title': 'Nadi Eitaa Bot'
+      },
+      body: JSON.stringify({
+        model: MODEL_NAME,
+        messages: [
+          { role: 'system', content: t('system_prompt') },
+          ...chatHistory
+        ],
+        stream: true
+      })
     });
-    const aiText = reply.choices[0].message.content;
+
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error?.message || `HTTP ${response.status}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let aiText = '';
+
+    typingEl.remove();
+    const aiMessageWrapper = addMessage('', 'ai');
+    const aiMessageEl = aiMessageWrapper.querySelector('.message');
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value);
+      const lines = chunk.split('\n');
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          const data = line.slice(6);
+          if (data === '[DONE]') break;
+          try {
+            const json = JSON.parse(data);
+            const content = json.choices?.[0]?.delta?.content || '';
+            if (content) {
+              aiText += content;
+              aiMessageEl.textContent = aiText;
+              chatEl.scrollTop = chatEl.scrollHeight;
+            }
+          } catch (e) { /* نادیده گرفتن */ }
+        }
+      }
+    }
+
     chatHistory.push({ role: 'assistant', content: aiText });
-    if (chatHistory.length > 12) chatHistory.splice(1, 2);
-    typingEl.remove();
-    addMessage(aiText, 'ai');
+    if (chatHistory.length > 20) chatHistory.splice(0, 2);
+
+    statusEl.textContent = t('status_ready');
   } catch (err) {
-    typingEl.remove();
-    addMessage(currentLang === 'fa' ? 'متأسفم، خطایی رخ داد.' : currentLang === 'ar' ? 'عذراً، حدث خطأ.' : 'Sorry, an error occurred.', 'ai');
     console.error(err);
+    typingEl.remove();
+    addMessage(currentLang === 'fa' ? `خطا: ${err.message}` : currentLang === 'ar' ? `خطأ: ${err.message}` : `Error: ${err.message}`, 'ai');
+    statusEl.textContent = t('status_error');
+    chatHistory.pop();
   }
 
   sendBtn.disabled = false;
+  isProcessing = false;
   promptEl.focus();
 }
 
-// ============ رویدادها ============
 sendBtn.addEventListener('click', sendMessage);
 promptEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-
-menuBtn.addEventListener('click', () => {
-  settingsPanel.classList.add('open');
-  settingsOverlay.classList.add('open');
-});
-settingsOverlay.addEventListener('click', () => {
-  settingsPanel.classList.remove('open');
-  settingsOverlay.classList.remove('open');
-});
-
-// فونت
+menuBtn.addEventListener('click', () => { settingsPanel.classList.add('open'); settingsOverlay.classList.add('open'); });
+settingsOverlay.addEventListener('click', () => { settingsPanel.classList.remove('open'); settingsOverlay.classList.remove('open'); });
 document.querySelectorAll('[data-font]').forEach(btn => {
   btn.addEventListener('click', () => {
     currentFont = btn.dataset.font;
@@ -583,8 +535,6 @@ document.querySelectorAll('[data-font]').forEach(btn => {
     saveSettings();
   });
 });
-
-// زبان
 document.querySelectorAll('[data-lang]').forEach(btn => {
   btn.addEventListener('click', () => {
     currentLang = btn.dataset.lang;
@@ -593,8 +543,6 @@ document.querySelectorAll('[data-lang]').forEach(btn => {
     saveSettings();
   });
 });
-
-// تم
 document.querySelectorAll('[data-theme]').forEach(btn => {
   btn.addEventListener('click', () => {
     currentTheme = btn.dataset.theme;
@@ -603,8 +551,6 @@ document.querySelectorAll('[data-theme]').forEach(btn => {
     saveSettings();
   });
 });
-
-// راهنما
 guideBtn.addEventListener('click', () => guideModal.classList.add('open'));
 closeGuide.addEventListener('click', () => guideModal.classList.remove('open'));
 guideModal.addEventListener('click', (e) => { if (e.target === guideModal) guideModal.classList.remove('open'); });
