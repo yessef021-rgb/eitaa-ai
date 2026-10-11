@@ -84,7 +84,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 .welcome-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 40px rgba(168,85,247,0.8); animation: float 3s ease-in-out infinite; }
 .welcome h2 { font-size: 20px; margin-bottom: 10px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .welcome p { color: var(--text-muted); font-size: 13px; line-height: 1.8; }
-.welcome .notice { margin-top: 15px; padding: 10px; background: rgba(255,200,0,0.15); border: 1px solid rgba(255,200,0,0.3); border-radius: 10px; font-size: 11px; color: #ffd966; }
 .welcome .guide-btn { margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); border: none; border-radius: 20px; color: #fff; font-family: inherit; font-size: 13px; cursor: pointer; font-weight: bold; }
 
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -118,8 +117,6 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 .modal { background: var(--panel-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--panel-border); border-radius: 20px; padding: 25px; max-width: 500px; width: 100%; max-height: 80vh; overflow-y: auto; color: var(--text-color); }
 .modal h2 { font-size: 18px; margin-bottom: 15px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .modal p { font-size: 13px; line-height: 1.9; color: var(--text-color); margin-bottom: 10px; }
-.modal ul { margin: 10px 0; padding-right: 20px; }
-.modal li { font-size: 13px; line-height: 1.9; margin-bottom: 6px; color: var(--text-color); }
 .modal .close-btn { margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); border: none; border-radius: 12px; color: #fff; font-family: inherit; font-size: 13px; cursor: pointer; font-weight: bold; width: 100%; }
 </style>
 </head>
@@ -192,24 +189,24 @@ body { font-family: var(--font-family); height: 100vh; overflow: hidden; backgro
 <div class="modal-overlay" id="guideModal">
 <div class="modal">
 <h2>📖 راهنمای کار با نادی</h2>
-<p><strong>۱. شروع:</strong> بعد از باز شدن صفحه، صبر کن تا مدل دانلود شود (فقط بار اول).</p>
-<p><strong>۲. سوال پرسیدن:</strong> توی باکس پایین، سوالت رو به فارسی بنویس و دکمه ارسال رو بزن.</p>
+<p><strong>۱. شروع:</strong> بعد از باز شدن صفحه، آماده استفاده است. نیازی به دانلود نیست.</p>
+<p><strong>۲. سوال پرسیدن:</strong> توی باکس پایین، سوالت رو بنویس و دکمه ارسال رو بزن.</p>
 <p><strong>۳. کپی جواب:</strong> زیر هر جواب نادی، دکمه «📋 کپی» هست. بزن تا کل متن کپی بشه.</p>
 <p><strong>۴. انتخاب بخشی از متن:</strong> می‌تونی با انگشت، بخشی از جواب رو نگه داری و انتخاب کنی.</p>
-<p><strong>۵. تنظیمات:</strong> با دکمه ⚙️ بالا سمت چپ می‌تونی فونت، زبان و تم رو عوض کنی.</p>
+<p><strong>۵. تنظیمات:</strong> با دکمه ⚙️ بالا می‌تونی فونت، زبان و تم رو عوض کنی.</p>
 <p><strong>۶. زبان‌ها:</strong> نادی می‌تونه فارسی، عربی و انگلیسی جواب بده.</p>
-<p><strong>۷. نکته مهم:</strong> هر بار که برنامه رو باز کنی، مدل از نو دانلود می‌شه (محدودیت WebView ایتا). پس اول کار در Wi-Fi باش.</p>
+<p><strong>۷. سرعت:</strong> نادی به صورت لحظه‌ای جواب می‌ده. فقط باید اینترنت فعال باشه.</p>
 <button class="close-btn" id="closeGuide">فهمیدم ✅</button>
 </div>
 </div>
 
 <script type="module">
 // ============================================
-// ⚠️ تنظیمات API - کلید خود را اینجا قرار دهید
+// کلید API OpenRouter
 // ============================================
-const OPENROUTER_API_KEY = 'YOUR_OPENROUTER_API_KEY'; // 🔑 کلید API خود را از openrouter.ai دریافت کنید
+const OPENROUTER_API_KEY = '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';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const MODEL_NAME = 'deepseek/deepseek-chat:free'; // مدل رایگان DeepSeek در OpenRouter
+const MODEL_NAME = 'deepseek/deepseek-chat:free';
 
 const statusEl = document.getElementById('status');
 const chatEl = document.getElementById('chat');
@@ -221,7 +218,6 @@ const settingsOverlay = document.getElementById('settingsOverlay');
 const guideBtn = document.getElementById('guideBtn');
 const guideModal = document.getElementById('guideModal');
 const closeGuide = document.getElementById('closeGuide');
-const htmlRoot = document.getElementById('htmlRoot');
 
 let isFirstMessage = true;
 let isProcessing = false;
@@ -234,7 +230,6 @@ const TRANSLATIONS = {
     dir: 'rtl', title: 'نادی', status_ready: 'آماده‌ام! بپرس ✨',
     status_thinking: 'در حال فکر کردن...', status_error: 'خطا در اتصال',
     welcome_title: 'سلام! من نادی هستم 👋', welcome_text: 'هر سوالی داری بپرس، همینجام.',
-    welcome_notice: '⚠️ بار اول مدل دانلود می‌شود (حدود ۴۰۰ مگابایت). لطفاً در Wi-Fi باشید.',
     guide_btn: '📖 راهنمای کار با نادی', placeholder: 'سوالت رو بنویس...',
     copy: '📋 کپی', copied: '✅ کپی شد', copy_error: '❌ خطا',
     settings_title: '⚙️ تنظیمات', font_label: '🔤 فونت', lang_label: '🌍 زبان',
@@ -243,13 +238,13 @@ const TRANSLATIONS = {
     about_creator_link: '📱 آیدی ایتا: @Cuteplus', about_channel: '📢 کانال',
     about_channel_link: '🔗 عضویت در کانال',
     guide_title: '📖 راهنمای کار با نادی',
-    guide_p1: '۱. شروع: بعد از باز شدن صفحه، صبر کن تا مدل دانلود شود (فقط بار اول).',
+    guide_p1: '۱. شروع: بعد از باز شدن صفحه، آماده استفاده است. نیازی به دانلود نیست.',
     guide_p2: '۲. سوال پرسیدن: توی باکس پایین، سوالت رو بنویس و دکمه ارسال رو بزن.',
     guide_p3: '۳. کپی جواب: زیر هر جواب نادی، دکمه «📋 کپی» هست. بزن تا کل متن کپی بشه.',
     guide_p4: '۴. انتخاب بخشی از متن: می‌تونی با انگشت، بخشی از جواب رو نگه داری و انتخاب کنی.',
     guide_p5: '۵. تنظیمات: با دکمه ⚙️ بالا می‌تونی فونت، زبان و تم رو عوض کنی.',
     guide_p6: '۶. زبان‌ها: نادی می‌تونه فارسی، عربی و انگلیسی جواب بده.',
-    guide_p7: '۷. نکته مهم: هر بار برنامه رو باز کنی، مدل از نو دانلود می‌شه. پس اول کار در Wi-Fi باش.',
+    guide_p7: '۷. سرعت: نادی به صورت لحظه‌ای جواب می‌ده. فقط باید اینترنت فعال باشه.',
     guide_close: 'فهمیدم ✅',
     system_prompt: 'شما "نادی" هستید، یک دستیار هوشمند فارسی‌زبان. قوانین: ۱) همیشه فقط به زبان فارسی پاسخ دهید. ۲) پاسخ‌ها کوتاه، دوستانه و مفید باشند. ۳) هرگز خود را شخص دیگری معرفی نکنید.'
   },
@@ -257,7 +252,6 @@ const TRANSLATIONS = {
     dir: 'rtl', title: 'نادي', status_ready: 'أنا جاهز! اسألني ✨',
     status_thinking: 'أفكر...', status_error: 'خطأ في الاتصال',
     welcome_title: 'مرحباً! أنا نادي 👋', welcome_text: 'اسألني أي شيء، أنا هنا.',
-    welcome_notice: '⚠️ في المرة الأولى يتم تحميل النموذج (حوالي 400 ميجابايت). يرجى استخدام Wi-Fi.',
     guide_btn: '📖 دليل استخدام نادي', placeholder: 'اكتب سؤالك...',
     copy: '📋 نسخ', copied: '✅ تم النسخ', copy_error: '❌ خطأ',
     settings_title: '⚙️ الإعدادات', font_label: '🔤 الخط', lang_label: '🌍 اللغة',
@@ -266,13 +260,13 @@ const TRANSLATIONS = {
     about_creator_link: '📱 معرف ايتا: @Cuteplus', about_channel: '📢 القناة',
     about_channel_link: '🔗 انضم إلى القناة',
     guide_title: '📖 دليل استخدام نادي',
-    guide_p1: '١. البداية: بعد فتح الصفحة، انتظر تحميل النموذج (المرة الأولى فقط).',
+    guide_p1: '١. البداية: بعد فتح الصفحة، جاهز للاستخدام. لا حاجة للتحميل.',
     guide_p2: '٢. طرح السؤال: اكتب سؤالك في الصندوق أدناه واضغط على زر الإرسال.',
     guide_p3: '٣. نسخ الرد: تحت كل رد، يوجد زر «📋 نسخ». اضغط عليه لنسخ النص.',
     guide_p4: '٤. تحديد جزء من النص: يمكنك الضغط مطولاً على أي جزء لتحديده.',
     guide_p5: '٥. الإعدادات: اضغط على زر ⚙️ لتغيير الخط واللغة والسمة.',
     guide_p6: '٦. اللغات: نادي يتحدث العربية والفارسية والإنجليزية.',
-    guide_p7: '٧. ملاحظة مهمة: في كل مرة تفتح التطبيق، يتم إعادة تحميل النموذج.',
+    guide_p7: '٧. السرعة: نادي يجيب بشكل فوري. يجب أن يكون الإنترنت مفعلاً.',
     guide_close: 'فهمت ✅',
     system_prompt: 'أنت "نادي"، مساعد ذكي. القواعد: ١) أجب دائماً بالعربية فقط. ٢) الردود قصيرة وودية ومفيدة. ٣) لا تقدم نفسك كشخص آخر.'
   },
@@ -280,7 +274,6 @@ const TRANSLATIONS = {
     dir: 'ltr', title: 'Nadi', status_ready: 'Ready! Ask me ✨',
     status_thinking: 'Thinking...', status_error: 'Connection error',
     welcome_title: 'Hi! I am Nadi 👋', welcome_text: 'Ask me anything, I am here.',
-    welcome_notice: '⚠️ First time the model downloads (~400 MB). Please use Wi-Fi.',
     guide_btn: '📖 How to use Nadi', placeholder: 'Type your question...',
     copy: '📋 Copy', copied: '✅ Copied', copy_error: '❌ Error',
     settings_title: '⚙️ Settings', font_label: '🔤 Font', lang_label: '🌍 Language',
@@ -289,13 +282,13 @@ const TRANSLATIONS = {
     about_creator_link: '📱 Eitaa ID: @Cuteplus', about_channel: '📢 Channel',
     about_channel_link: '🔗 Join Channel',
     guide_title: '📖 How to use Nadi',
-    guide_p1: '1. Start: After page opens, wait for the model to download (first time only).',
+    guide_p1: '1. Start: Ready to use after page loads. No download needed.',
     guide_p2: '2. Ask: Type your question in the box below and press send.',
     guide_p3: '3. Copy answer: Below each answer, tap «📋 Copy» to copy the text.',
     guide_p4: '4. Select text: Long-press on any part to select it.',
     guide_p5: '5. Settings: Tap ⚙️ to change font, language and theme.',
     guide_p6: '6. Languages: Nadi speaks Persian, Arabic and English.',
-    guide_p7: '7. Note: Each time you open the app, the model re-downloads.',
+    guide_p7: '7. Speed: Nadi responds instantly. Internet must be active.',
     guide_close: 'Got it ✅',
     system_prompt: 'You are "Nadi", a smart assistant. Rules: 1) Always answer in English only. 2) Answers should be short, friendly and helpful. 3) Never introduce yourself as someone else.'
   }
@@ -308,13 +301,11 @@ function applyLanguage() {
   document.documentElement.dir = lang.dir;
   document.body.style.direction = lang.dir;
   document.querySelector('.header-text h1').textContent = lang.title;
-  if (statusEl.textContent !== t('status_thinking')) statusEl.textContent = lang.status_ready;
+  if (statusEl.textContent !== t('status_thinking') && statusEl.textContent !== t('status_error')) statusEl.textContent = lang.status_ready;
   const welcome = chatEl.querySelector('.welcome');
   if (welcome) {
     welcome.querySelector('h2').textContent = lang.welcome_title;
     welcome.querySelector('p').textContent = lang.welcome_text;
-    const notice = welcome.querySelector('.notice');
-    if (notice) notice.textContent = lang.welcome_notice;
     welcome.querySelector('.guide-btn').textContent = lang.guide_btn;
   }
   promptEl.placeholder = lang.placeholder;
@@ -353,15 +344,6 @@ async function init() {
     console.log('SDK ایتا فعال شد');
   }
   loadSettings();
-
-  // بررسی تنظیمات API
-  if (OPENROUTER_API_KEY === 'YOUR_OPENROUTER_API_KEY' || !OPENROUTER_API_KEY) {
-    statusEl.textContent = currentLang === 'fa' ? 'کلید API تنظیم نشده' : currentLang === 'ar' ? 'مفتاح API غير مُعد' : 'API Key not set';
-    promptEl.disabled = true;
-    sendBtn.disabled = true;
-    return;
-  }
-
   statusEl.textContent = t('status_ready');
   promptEl.disabled = false;
   sendBtn.disabled = false;
@@ -448,7 +430,6 @@ async function sendMessage() {
   statusEl.textContent = t('status_thinking');
 
   const typingEl = addTyping();
-
   chatHistory.push({ role: 'user', content: text });
 
   try {
