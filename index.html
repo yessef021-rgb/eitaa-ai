@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>📚 راهنمای جامع ویندوز | کوییز خانواده در اسلام</title>
+<style>
+/* ==================== ریست و تنظیمات کلی ==================== */
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary: #0ea5e9;
+  --primary-hover: #0284c7;
+  --border-color: #334155;
+  --code-bg: #0f172a;
+  --kbd-bg: #334155;
+  --kbd-shadow: #1e293b;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Tahoma', 'Vazir', 'Segoe UI', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  position: fixed;
+  touch-action: manipulation;
+  background: #0f172a;
+}
+
+body {
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==================== صفحه شروع (کپی شده از استایل شما) ==================== */
+.screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  padding: 15px;
+  overflow-y: auto;
+  animation: fadeIn 0.5s ease;
+  z-index: 10;
+}
+
+.screen.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+#startScreen {
+  background: linear-gradient(135deg, #1e3c72 0%, #7e57c2 50%, #e91e63 100%);
+  background-size: 400% 400%;
+  animation: bgShift 15s ease infinite;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.start-container {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255,255,255,0.97);
+  border-radius: 35px;
+  padding: 30px 25px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 60px rgba(126,87,194,0.4);
+  text-align: center;
+  position: relative;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+}
+
+.start-container::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 35px;
+  padding: 4px;
+  background: linear-gradient(135deg, #e91e63, #ffd60a, #06d6a0, #4da6ff, #7e57c2, #e91e63);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRotate 5s linear infinite;
+  z-index: -1;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.teacher-photo-wrapper {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 20px;
+}
+
+.teacher-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid #4da6ff;
+  background: linear-gradient(135deg, #4da6ff, #1e3c72);
+  box-shadow: 0 8px 30px rgba(30,60,114,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.teacher-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.photo-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 3px dashed #4da6ff;
+  animation: ringRotate 10s linear infinite;
+  z-index: 1;
+}
+
+.photo-ring.ring2 {
+  inset: -20px;
+  border: 3px dotted #e91e63;
+  animation: ringRotate 15s linear infinite reverse;
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.game-title {
+  font-size: 26px;
+  margin: 15px 0 10px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #e91e63, #7e57c2, #1e3c72, #4da6ff, #e91e63);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: titleShine 3s linear infinite;
+}
+
+@keyframes titleShine {
+  to { background-position: 300% center; }
+}
+
+.game-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.info-box {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border: 2px dashed #4da6ff;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 15px;
+}
+
+.info-row + .info-row { border-top: 1px dashed #ccc; }
+.info-icon { font-size: 20px; }
+.info-label { color: #666; font-weight: bold; }
+.teacher-name { color: #1e3c72; font-weight: bold; font-size: 16px; }
+.teacher-phone { color: #e91e63; font-weight: bold; direction: ltr; font-size: 16px; }
+
+.big-btn {
+  background: linear-gradient(135deg, #1e3c72, #7e57c2, #e91e63);
+  background-size: 200% 200%;
+  color: #fff;
+  border: none;
+  padding: 16px 45px;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #4a148c, 0 15px 35px rgba(126,87,194,0.5);
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  animation: btnGradient 3s ease infinite;
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+  transition: transform 0.15s;
+}
+
+@keyframes btnGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.big-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: btnShine 3s linear infinite;
+}
+
+@keyframes btnShine { to { left: 100%; } }
+.big-btn:active { transform: translateY(5px); box-shadow: 0 3px 0 #4a148c; }
+
+.logo-wrapper {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px dashed #4da6ff;
+}
+
+.logo-fallback {
+  font-size: 20px;
+  display: inline-block;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #1e3c72, #7e57c2);
+  border-radius: 18px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.copyright { font-size: 12px; color: #888; margin-top: 12px; }
+
+/* دکمه موسیقی */
+.music-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e3c72, #7e57c2);
+  color: #fff;
+  border: 3px solid #fff;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  padding: 0;
+}
+
+.music-toggle:hover { transform: scale(1.1); }
+.music-toggle:active { transform: scale(0.95); }
+.music-toggle.muted {
+  background: linear-gradient(135deg, #999, #666);
+  opacity: 0.8;
+}
+
+/* ==================== صفحه اصلی راهنما (استایل قبلی) ==================== */
+#mainScreen {
+  background-color: var(--bg-color);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  justify-content: flex-start;
+}
+
+#mainScreen.active {
+  display: flex;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+  background-color: var(--card-bg);
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  background-color: rgba(14, 165, 233, 0.1);
+  font-weight: bold;
+}
+
+.tab-btn.active.danger-tab {
+  color: var(--danger);
+  background-color: var(--danger-bg);
+}
+
+.tab-count {
+  background-color: var(--border-color);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.tab-btn.active .tab-count {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.tab-btn.active.danger-tab .tab-count {
+  background-color: var(--danger);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary);
+}
+
+.card.danger-card {
+  border-color: #7f1d1d;
+}
+
+.card.danger-card:hover {
+  border-color: var(--danger);
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-main);
+}
+
+.card-tag {
+  font-size: 0.75rem;
+  background-color: rgba(14, 165, 233, 0.15);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.card-tag.danger-tag {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.cmd-box {
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #a5f3fc;
+  direction: ltr;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: all;
+  position: relative;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.cmd-box:hover {
+  background-color: #1a2333;
+}
+
+.cmd-box::after {
+  content: '📋 کپی';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  direction: rtl;
+}
+
+.cmd-box:hover::after {
+  opacity: 1;
+}
+
+.keys-box {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  direction: ltr;
+  justify-content: flex-start;
+}
+
+kbd {
+  background-color: var(--kbd-bg);
+  border: 1px solid #475569;
+  border-bottom: 3px solid var(--kbd-shadow);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  min-width: 40px;
+  text-align: center;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.treatment-box {
+  background-color: var(--danger-bg);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #fca5a5;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.treatment-box::before {
+  content: '💊';
+  font-size: 1.2rem;
+}
+
+#toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: var(--success);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+#toast.danger-toast {
+  background-color: var(--danger);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+}
+
+/* ==================== واکنش‌گرا ==================== */
+@media (min-width: 768px) {
+  .card-grid { grid-template-columns: 1fr 1fr; }
+  header h1 { font-size: 2.5rem; }
+}
+
+@media (max-width: 600px) {
+  .game-title { font-size: 20px; }
+  .teacher-photo-wrapper { width: 120px; height: 120px; }
+  .big-btn { font-size: 18px; padding: 14px 30px; }
+  .music-toggle { width: 48px; height: 48px; font-size: 20px; bottom: 15px; left: 15px; }
+  .container { padding: 0 5px; }
+  .card-header { flex-direction: column; align-items: flex-start; }
+  .tabs { gap: 5px; }
+  .tab-btn { padding: 8px 12px; font-size: 0.9rem; }
+  .cmd-box { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== دکمه موسیقی ==================== -->
+<button id="musicToggle" class="music-toggle" title="روشن/خاموش موسیقی">🔇</button>
+
+<!-- ==================== آهنگ پس‌زمینه ==================== -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ==================== صفحه شروع ==================== -->
+<div id="startScreen" class="screen active">
+    <div class="start-container">
+        <div class="teacher-photo-wrapper">
+            <div class="teacher-photo" id="teacherPhoto">👩‍🏫</div>
+            <div class="photo-ring"></div>
+            <div class="photo-ring ring2"></div>
+        </div>
+
+        <h1 class="game-title">📚 راهنمای جامع ویندوز</h1>
+        <p class="game-subtitle">دستورات، میان‌برها و کدهای خطرناک</p>
+
+        <div class="info-box">
+            <div class="info-row">
+                <span class="info-icon">👨‍💻</span>
+                <span class="info-label">توسعه‌دهنده:</span>
+                <span class="teacher-name">پیام نور</span>
+            </div>
+            <div class="info-row">
+                <span class="info-icon">📞</span>
+                <span class="info-label">تماس:</span>
+                <span class="teacher-phone">09222517707</span>
+            </div>
+        </div>
+
+        <button id="startBtn" class="big-btn">🚀 ورود به راهنما</button>
+
+        <div class="logo-wrapper">
+            <div class="logo-fallback" id="logoFallback">📚 راهنما 📚</div>
+        </div>
+        <div class="copyright">© ۱۴۰۴ - تمامی حقوق محفوظ است</div>
+    </div>
+</div>
+
+<!-- ==================== صفحه اصلی راهنما ==================== -->
+<div id="mainScreen" class="screen">
+  <div class="container">
+    <header>
+      <h1>🪟 راهنمای جامع ویندوز</h1>
+      <p>دستورات کنترل پنل، میان‌برهای کیبورد و کدهای خطرناک با راه درمان</p>
+    </header>
+    
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 جستجو در نام، دستور یا توضیحات...">
+    </div>
+    
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="control-panel">⚙️ کنترل پنل <span class="tab-count" id="count-cp">0</span></button>
+      <button class="tab-btn" data-tab="shortcuts">⌨️ میان‌برهای عمومی <span class="tab-count" id="count-sc">0</span></button>
+      <button class="tab-btn danger-tab" data-tab="dangerous">☠️ کدهای خطرناک <span class="tab-count" id="count-dg">0</span></button>
+    </div>
+    
+    <div id="control-panel" class="tab-content active">
+      <div class="card-grid" id="grid-cp"></div>
+    </div>
+    
+    <div id="shortcuts" class="tab-content">
+      <div class="card-grid" id="grid-sc"></div>
+    </div>
+    
+    <div id="dangerous" class="tab-content">
+      <div class="card-grid" id="grid-dg"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast">✅ دستور با موفقیت کپی شد!</div>
+
+<script>
+/* ==================== داده‌ها (DATA) ==================== */
+const DATA = {
+  "کنترل پنل": [
+    { name: "تنظیمات نمایشگر", cmd: "desk.cpl", desc: "باز کردن تنظیمات مربوط به نمایشگر و رزولوشن", tag: "نمایش" },
+    { name: "تنظیمات صدا", cmd: "mmsys.cpl", desc: "مدیریت دستگاه‌های صوتی و تنظیمات میکروفون", tag: "صدا" },
+    { name: "برنامه‌ها و ویژگی‌ها", cmd: "appwiz.cpl", desc: "حذف یا تغییر برنامه‌های نصب شده در ویندوز", tag: "نرم‌افزار" },
+    { name: "تنظیمات اینترنت", cmd: "inetcpl.cpl", desc: "تنظیمات مربوط به اتصالات اینترنت و پروکسی", tag: "شبکه" },
+    { name: "تاریخ و زمان", cmd: "timedate.cpl", desc: "تنظیم تاریخ، ساعت و منطقه زمانی سیستم", tag: "سیستم" },
+    { name: "موس و کیبورد", cmd: "main.cpl", desc: "تنظیمات مربوط به سرعت موس، دکمه‌ها و کیبورد", tag: "سخت‌افزار" },
+    { name: "مدیریت انرژی", cmd: "powercfg.cpl", desc: "تنظیمات مربوط به مصرف برق و حالت‌های خواب", tag: "سیستم" },
+    { name: "فایروال ویندوز", cmd: "firewall.cpl", desc: "مدیریت امنیت شبکه و تنظیمات فایروال", tag: "امنیت" },
+    { name: "گزارش رویدادها", cmd: "eventvwr.msc", desc: "مشاهده لاگ‌ها و رویدادهای سیستم برای عیب‌یابی", tag: "ابزار" },
+    { name: "مدیریت دیسک", cmd: "diskmgmt.msc", desc: "پارتیشن‌بندی، فرمت و مدیریت هارد دیسک‌ها", tag: "ذخیره‌سازی" },
+    { name: "سرویس‌ها", cmd: "services.msc", desc: "مدیریت سرویس‌های ویندوز (شروع، توقف، غیرفعال‌سازی)", tag: "سیستم" },
+    { name: "ویرایشگر رجیستری", cmd: "regedit", desc: "ویرایش مستقیم رجیستری ویندوز (با احتیاط)", tag: "ابزار پیشرفته" },
+    { name: "تنظیمات سیستم", cmd: "msconfig", desc: "مدیریت برنامه‌های استارت‌آپ و سرویس‌های بوت", tag: "سیستم" },
+    { name: "اطلاعات سیستم", cmd: "msinfo32", desc: "مشاهده مشخصات سخت‌افزاری و نرم‌افزاری سیستم", tag: "ابزار" },
+    { name: "مانیتور منابع", cmd: "resmon", desc: "مشاهده زنده مصرف CPU، رم، دیسک و شبکه", tag: "ابزار" },
+    { name: "کنترل پنل", cmd: "control", desc: "باز کردن پنجره اصلی کنترل پنل ویندوز", tag: "عمومی" },
+    { name: "مدیریت کامپیوتر", cmd: "compmgmt.msc", desc: "کنسول جامع مدیریت سیستم، شامل چند ابزار", tag: "مدیریت" },
+    { name: "مدیریت دستگاه‌ها", cmd: "devmgmt.msc", desc: "مدیریت درایورها و سخت‌افزارهای نصب شده", tag: "مدیریت" },
+    { name: "زمان‌بندی وظایف", cmd: "taskschd.msc", desc: "زمان‌بندی اجرای خودکار برنامه‌ها و اسکریپت‌ها", tag: "مدیریت" },
+    { name: "مانیتور عملکرد", cmd: "perfmon.msc", desc: "نظارت بر عملکرد سیستم با نمودارهای دقیق", tag: "ابزار" },
+    { name: "مدیریت کاربران محلی", cmd: "lusrmgr.msc", desc: "مدیریت حساب‌های کاربری و گروه‌ها (فقط نسخه Pro)", tag: "مدیریت" },
+    { name: "اتصالات شبکه", cmd: "ncpa.cpl", desc: "مدیریت کارت‌های شبکه و اتصالات اینترنت", tag: "شبکه" },
+    { name: "تنظیمات پیشرفته فایروال", cmd: "wf.msc", desc: "مدیریت قوانین پیشرفته فایروال و پورت‌ها", tag: "امنیت" },
+    { name: "حساب‌های کاربری", cmd: "netplwiz", desc: "مدیریت حساب‌های کاربری و تغییر رمز عبور", tag: "مدیریت" },
+    { name: "ویرایشگر خط‌مشی گروهی", cmd: "gpedit.msc", desc: "اعمال محدودیت‌های امنیتی و سیستمی (فقط نسخه Pro)", tag: "امنیت" },
+    { name: "پاکسازی دیسک", cmd: "cleanmgr", desc: "حذف فایل‌های موقت و آزادسازی فضای دیسک", tag: "ذخیره‌سازی" },
+    { name: "پوشه فایل‌های موقت", cmd: "%temp%", desc: "باز کردن پوشه Temporary Files کاربر", tag: "ذخیره‌سازی" },
+    { name: "پوشه موقت سیستم", cmd: "temp", desc: "باز کردن پوشه Temp سطح ویندوز", tag: "ذخیره‌سازی" },
+    { name: "خط فرمان", cmd: "cmd", desc: "باز کردن Command Prompt", tag: "ابزار" },
+    { name: "پاورشل", cmd: "powershell", desc: "باز کردن Windows PowerShell", tag: "ابزار" },
+    { name: "مدیریت وظایف", cmd: "taskmgr", desc: "باز کردن Task Manager", tag: "ابزار" },
+    { name: "تنظیمات مدرن", cmd: "ms-settings:", desc: "باز کردن برنامه Settings ویندوز ۱۰ و ۱۱", tag: "سیستم" },
+    { name: "اکسپلورر فایل", cmd: "explorer", desc: "باز کردن File Explorer", tag: "عمومی" },
+    { name: "نسخه ویندوز", cmd: "winver", desc: "نمایش نسخه و ساختار ویندوز نصب شده", tag: "اطلاعات" },
+    { name: "مشاهده IP", cmd: "ipconfig", desc: "نمایش اطلاعات شبکه و آدرس IP", tag: "شبکه" },
+    { name: "بررسی فایل‌های سیستمی", cmd: "sfc /scannow", desc: "اسکن و تعمیر فایل‌های سیستمی خراب", tag: "ابزار" },
+    { name: "بررسی سلامت هارد", cmd: "chkdsk", desc: "بررسی و رفع خطاهای دیسک", tag: "ذخیره‌سازی" },
+    { name: "پاک کردن DNS", cmd: "ipconfig /flushdns", desc: "پاک کردن حافظه DNS برای رفع مشکل اینترنت", tag: "شبکه" },
+    { name: "خاموش کردن سیستم", cmd: "shutdown /s /t 0", desc: "خاموش کردن فوری سیستم", tag: "سیستم" },
+    { name: "لغو خاموش شدن", cmd: "shutdown /a", desc: "لغو عملیات خاموش شدن زمان‌بندی شده", tag: "سیستم" },
+    { name: "مدیریت پارتیشن", cmd: "diskpart", desc: "مدیریت پیشرفته پارتیشن‌ها از خط فرمان", tag: "ذخیره‌سازی" },
+    { name: "ابزار تشخیص DirectX", cmd: "dxdiag", desc: "مشاهده اطلاعات گرافیک و درایورهای DirectX", tag: "اطلاعات" },
+    { name: "نقشه کاراکترها", cmd: "charmap", desc: "باز کردن جدول کاراکترهای ویندوز", tag: "ابزار" },
+    { name: "ماشین حساب", cmd: "calc", desc: "باز کردن برنامه Calculator", tag: "ابزار" },
+    { name: "نوت‌پد", cmd: "notepad", desc: "باز کردن برنامه Notepad", tag: "ابزار" },
+    { name: "پینت", cmd: "mspaint", desc: "باز کردن برنامه Paint", tag: "ابزار" },
+    { name: "ناشنوای ویندوز (Magnifier)", cmd: "magnify", desc: "باز کردن ذره‌بین برای بزرگنمایی صفحه", tag: "دسترس‌پذیری" },
+    { name: "صفحه‌کلید روی صفحه", cmd: "osk", desc: "باز کردن On-Screen Keyboard", tag: "دسترس‌پذیری" },
+    { name: "ابزار برش تصویر", cmd: "snippingtool", desc: "باز کردن Snipping Tool برای اسکرین‌شات", tag: "ابزار" },
+    { name: "بررسی RAM", cmd: "mdsched", desc: "بررسی حافظه رم برای یافتن خطاها", tag: "ابزار" },
+    { name: "حذف نرم‌افزار مخرب", cmd: "mrt", desc: "اجرای ابزار حذف بدافزار ویندوز", tag: "امنیت" },
+    { name: "کنترل صدا", cmd: "sndvol", desc: "باز کردن میکسر صدا (Volume Mixer)", tag: "صدا" },
+    { name: "مدیریت چاپگرها", cmd: "control printers", desc: "باز کردن بخش چاپگرها و فکس", tag: "سخت‌افزار" },
+    { name: "ابزارهای مدیریتی", cmd: "control admintools", desc: "باز کردن پوشه Administrative Tools", tag: "مدیریت" },
+    { name: "سیاست‌های امنیتی محلی", cmd: "secpol.msc", desc: "مدیریت سیاست‌های امنیتی (فقط نسخه Pro)", tag: "امنیت" },
+    { name: "گزارش نتیجه سیاست‌ها", cmd: "rsop.msc", desc: "مشاهده نتیجه سیاست‌های گروهی اعمال شده", tag: "امنیت" },
+    { name: "مشاهده زبانه‌های پنهان", cmd: "optionalfeatures", desc: "مدیریت ویژگی‌های اختیاری ویندوز", tag: "سیستم" },
+    { name: "نمایش آدرس MAC", cmd: "getmac", desc: "نمایش آدرس MAC آداپتورهای شبکه", tag: "شبکه" },
+    { name: "تست اتصال شبکه", cmd: "ping google.com", desc: "تست اتصال به سرور گوگل", tag: "شبکه" },
+    { name: "نمایش مسیر (Trace)", cmd: "tracert google.com", desc: "ردیابی مسیر بسته‌های شبکه تا مقصد", tag: "شبکه" },
+    { name: "نمایش جداول مسیریابی", cmd: "route print", desc: "نمایش جدول مسیریابی شبکه سیستم", tag: "شبکه" },
+    { name: "مشاهده پروسه‌های در حال اجرا", cmd: "tasklist", desc: "نمایش لیست تمام پروسه‌های فعال در خط فرمان", tag: "ابزار" },
+    { name: "اطلاعات سیستم (کلاسیک)", cmd: "sysdm.cpl", desc: "باز کردن پنجره System Properties", tag: "اطلاعات" },
+    { name: "پشتیبان‌گیری و بازیابی", cmd: "rstrui", desc: "باز کردن ابزار System Restore", tag: "بازیابی" },
+    { name: "مدیریت امضای درایور", cmd: "sigverif", desc: "بررسی امضای دیجیتال درایورهای نصب شده", tag: "امنیت" },
+    { name: "سطل بازیافت", cmd: "start shell:RecycleBinFolder", desc: "باز کردن پوشه Recycle Bin", tag: "عمومی" },
+    { name: "پوشه Startup", cmd: "shell:startup", desc: "باز کردن پوشه برنامه‌های شروع خودکار", tag: "عمومی" },
+    { name: "پوشه دانلودها", cmd: "shell:downloads", desc: "باز کردن پوشه Downloads", tag: "عمومی" },
+    { name: "پوشه اسناد", cmd: "shell:documents", desc: "باز کردن پوشه Documents", tag: "عمومی" },
+    { name: "پوشه دسکتاپ", cmd: "shell:desktop", desc: "باز کردن پوشه Desktop", tag: "عمومی" },
+    { name: "امنیت و نگهداری", cmd: "wscui.cpl", desc: "باز کردن Security and Maintenance", tag: "امنیت" },
+    { name: "کنترل منطقه‌ای", cmd: "intl.cpl", desc: "تنظیمات زبان، منطقه و فرمت تاریخ", tag: "سیستم" }
+  ],
+  "میان‌برهای عمومی": [
+    { name: "کپی", keys: ["Ctrl", "C"], desc: "کپی کردن آیتم انتخاب شده" },
+    { name: "برش", keys: ["Ctrl", "X"], desc: "برش دادن آیتم انتخاب شده" },
+    { name: "چسباندن", keys: ["Ctrl", "V"], desc: "چسباندن آیتم کپی یا برش داده شده" },
+    { name: "واگرد (Undo)", keys: ["Ctrl", "Z"], desc: "بازگرداندن آخرین عمل انجام شده" },
+    { name: "ازنو (Redo)", keys: ["Ctrl", "Y"], desc: "تکرار آخرین عمل واگرد شده" },
+    { name: "انتخاب همه", keys: ["Ctrl", "A"], desc: "انتخاب تمام آیتم‌های موجود در پوشه یا صفحه" },
+    { name: "ذخیره", keys: ["Ctrl", "S"], desc: "ذخیره کردن فایل یا سند جاری" },
+    { name: "جستجو", keys: ["Ctrl", "F"], desc: "باز کردن کادر جستجو در برنامه یا صفحه" },
+    { name: "چاپ", keys: ["Ctrl", "P"], desc: "باز کردن پنجره چاپ" },
+    { name: "باز کردن فایل جدید", keys: ["Ctrl", "N"], desc: "ایجاد سند یا پنجره جدید" },
+    { name: "بستن پنجره فعال", keys: ["Alt", "F4"], desc: "بستن برنامه یا پنجره در حال استفاده" },
+    { name: "تغییر پنجره‌ها", keys: ["Alt", "Tab"], desc: "جابجایی سریع بین پنجره‌های باز" },
+    { name: "تغییر پنجره‌ها (بدون پیش‌نمایش)", keys: ["Alt", "Esc"], desc: "جابجایی بین پنجره‌ها به ترتیب باز شدن" },
+    { name: "قفل کردن سیستم", keys: ["Win", "L"], desc: "قفل کردن سریع کامپیوتر بدون خاموش کردن" },
+    { name: "نمایش دسکتاپ", keys: ["Win", "D"], desc: "مینیمایز کردن همه پنجره‌ها و نمایش دسکتاپ" },
+    { name: "باز کردن File Explorer", keys: ["Win", "E"], desc: "باز کردن پنجره Windows Explorer" },
+    { name: "باز کردن Run", keys: ["Win", "R"], desc: "باز کردن پنجره Run برای اجرای دستورات" },
+    { name: "تنظیمات", keys: ["Win", "I"], desc: "باز کردن برنامه Settings ویندوز" },
+    { name: "گرفتن اسکرین‌شات (ناحیه)", keys: ["Win", "Shift", "S"], desc: "ابزار برش تصویر برای عکس گرفتن از ناحیه‌ای از صفحه" },
+    { name: "گرفتن اسکرین‌شات (کل صفحه)", keys: ["PrtScn"], desc: "کپی کل صفحه در کلیپ‌بورد" },
+    { name: "ذخیره اسکرین‌شات", keys: ["Win", "PrtScn"], desc: "ذخیره اسکرین‌شات در پوشه Pictures" },
+    { name: "Task Manager", keys: ["Ctrl", "Shift", "Esc"], desc: "باز کردن مستقیم مدیریت وظایف" },
+    { name: "منوی امنیتی", keys: ["Ctrl", "Alt", "Del"], desc: "نمایش صفحه گزینه‌های امنیتی" },
+    { name: "منوی Start", keys: ["Win"], desc: "باز کردن منوی شروع" },
+    { name: "منوی Start (کلاسیک)", keys: ["Ctrl", "Esc"], desc: "باز کردن منوی شروع" },
+    { name: "منوی مخفی Start", keys: ["Win", "X"], desc: "باز کردن منوی ابزارهای مدیریتی" },
+    { name: "جستجوی ویندوز", keys: ["Win", "S"], desc: "باز کردن کادر جستجوی ویندوز" },
+    { name: "مرکز اعلانات", keys: ["Win", "A"], desc: "باز کردن Action Center" },
+    { name: "مرکز اعلانات (Win 11)", keys: ["Win", "N"], desc: "باز کردن Notification Center" },
+    { name: "صفحه Task View", keys: ["Win", "Tab"], desc: "نمایش تمام پنجره‌ها و دسکتاپ‌های مجازی" },
+    { name: "دسکتاپ مجازی جدید", keys: ["Win", "Ctrl", "D"], desc: "ایجاد یک دسکتاپ مجازی جدید" },
+    { name: "بستن دسکتاپ مجازی", keys: ["Win", "Ctrl", "F4"], desc: "بستن دسکتاپ مجازی فعلی" },
+    { name: "تغییر دسکتاپ مجازی", keys: ["Win", "Ctrl", "→"], desc: "رفتن به دسکتاپ مجازی بعدی" },
+    { name: "تغییر دسکتاپ مجازی", keys: ["Win", "Ctrl", "←"], desc: "رفتن به دسکتاپ مجازی قبلی" },
+    { name: "مینیمایز همه پنجره‌ها", keys: ["Win", "M"], desc: "کوچک کردن تمام پنجره‌های باز" },
+    { name: "بازیابی پنجره‌ها", keys: ["Win", "Shift", "M"], desc: "بازگرداندن پنجره‌های مینیمایز شده" },
+    { name: "نمایش دسکتاپ (موقت)", keys: ["Win", ","], desc: "نمایش دسکتاپ تا زمانی که کلید Win نگه داشته شود" },
+    { name: "چیدمان پنجره (چپ)", keys: ["Win", "←"], desc: "چسباندن پنجره به نیمه چپ صفحه" },
+    { name: "چیدمان پنجره (راست)", keys: ["Win", "→"], desc: "چسباندن پنجره به نیمه راست صفحه" },
+    { name: "چیدمان پنجره (بالا)", keys: ["Win", "↑"], desc: "چسباندن پنجره به نیمه بالایی صفحه" },
+    { name: "چیدمان پنجره (پایین)", keys: ["Win", "↓"], desc: "چسباندن پنجره به نیمه پایینی صفحه" },
+    { name: "انتقال پنجره به مانیتور دیگر", keys: ["Win", "Shift", "→"], desc: "انتقال پنجره فعال به مانیتور سمت راست" },
+    { name: "انتقال پنجره به مانیتور دیگر", keys: ["Win", "Shift", "←"], desc: "انتقال پنجره فعال به مانیتور سمت چپ" },
+    { name: "پروژه / اتصال به نمایشگر", keys: ["Win", "P"], desc: "انتخاب حالت نمایشگر دوم (Duplicate, Extend, ...)" },
+    { name: "متن‌خوان (Narrator)", keys: ["Win", "Ctrl", "Enter"], desc: "روشن کردن قابلیت متن‌خوان" },
+    { name: "باز کردن Game Bar", keys: ["Win", "G"], desc: "باز کردن نوار بازی ایکس‌باکس" },
+    { name: "نمایش کلیپ‌بورد", keys: ["Win", "V"], desc: "باز کردن تاریخچه کلیپ‌بورد" },
+    { name: "انتخابگر Emoji", keys: ["Win", "."], desc: "باز کردن پنل ایموجی و کاراکترهای خاص" },
+    { name: "انتخابگر Emoji (جایگزین)", keys: ["Win", ";"], desc: "باز کردن پنل ایموجی" },
+    { name: "باز کردن پنل اشتراک‌گذاری", keys: ["Win", "H"], desc: "باز کردن سایدبار اشتراک‌گذاری" },
+    { name: "باز کردن اتصال‌ها", keys: ["Win", "K"], desc: "باز کردن سایدبار اتصال به دستگاه‌های بی‌سیم" },
+    { name: "باز کردن Widgets", keys: ["Win", "W"], desc: "باز کردن پنل ابزارک‌ها" },
+    { name: "باز کردن جستجوی فیدبک", keys: ["Win", "F"], desc: "باز کردن Feedback Hub" },
+    { name: "باز کردن Windows Ink", keys: ["Win", "O"], desc: "قفل کردن جهت صفحه نمایش" }
+  ],
+  "کدهای خطرناک": [
+    { 
+      name: "پاک کردن کل درایو", 
+      cmd: "format C: /q", 
+      desc: "فرمت سریع درایو C یا حذف اجباری تمام فایل‌های آن بدون هیچ هشداری. این دستور کل اطلاعات درایو ویندوز را از بین می‌برد.", 
+      tag: "تخریب فایل",
+      treatment: "اگر فقط درایو C پاک شده اما فایل‌های شخصی روی درایوهای دیگر دارید، باید ویندوز را دوباره نصب کنید. به یک فلش مموری حداقل ۸ گیگابایتی و یک کامپیوتر سالم دیگر نیاز دارید. با ابزار رسمی Media Creation Tool مایکروسافت، یک فلش بوت‌بل بسازید و از طریق آن ویندوز را نصب کنید."
+    },
+    { 
+      name: "حذف اجباری فایل‌های درایو", 
+      cmd: "del /f /s /q C:\\*.*", 
+      desc: "حذف تمام فایل‌های درایو C به صورت بازگشتی (Recursive) و بدون هیچ پیام تأییدی. این دستور سکوت‌آمیز است و اجازه بازگشت نمی‌دهد.", 
+      tag: "تخریب فایل",
+      treatment: "اگر ویندوز بالا نمی‌آید، با فلش نصب ویندوز بوت کنید و از گزینه Repair your computer استفاده کنید. در Command Prompt دستور sfc /scannow را اجرا کنید. اگر فایل‌های سیستمی قابل بازیابی نبودند، نصب تازه ویندوز تنها گزینه است."
+    },
+    { 
+      name: "خراب کردن بوت (غیرفعال کردن Recovery)", 
+      cmd: "bcdedit /set {default} recoveryenabled No", 
+      desc: "غیرفعال کردن قابلیت بازیابی ویندوز. پس از اجرای این دستور، در صورت خرابی ویندوز نمی‌توانید از حالت Recovery استفاده کنید.", 
+      tag: "خرابی بوت",
+      treatment: "با یک فلش نصب ویندوز بوت کنید. در صفحه نصب، گزینه Repair your computer را انتخاب کنید و وارد Command Prompt شوید. دستور bcdedit /set {default} recoveryenabled Yes را اجرا کنید تا قابلیت بازیابی دوباره فعال شود."
+    },
+    { 
+      name: "نادیده گرفتن خطاهای بوت", 
+      cmd: "bcdedit /set {default} bootstatuspolicy ignoreallfailures", 
+      desc: "مجبور کردن ویندوز به تلاش برای بوت در حالت عادی، حتی وقتی فایل‌های حیاتی خراب شده‌اند. این باعث می‌شود ویندوز به جای نمایش خطا، مستقیم کرش کند و به صفحه آبی مرگ بیفتد.", 
+      tag: "خرابی بوت",
+      treatment: "با فلش نصب بوت کنید و وارد Command Prompt شوید. دستور bootrec /fixmbr و سپس bootrec /fixboot و bootrec /rebuildbcd را اجرا کنید. اگر مشکل حل نشد، دستور bcdedit /set {default} bootstatuspolicy DisplayAllFailures را اجرا کنید تا خطاها نمایش داده شوند."
+    },
+    { 
+      name: "از کار انداختن Taskbar و آیکون‌ها", 
+      cmd: "taskkill /f /im explorer.exe", 
+      desc: "بستن ناگهانی فرآیند Windows Explorer که مسئول نوار وظیفه (Taskbar)، منوی استارت و آیکون‌های دسکتاپ است. این مورد خطرناک نیست و با ریستارت ساده درست می‌شود.", 
+      tag: "شیطنت",
+      treatment: "کلیدهای Ctrl + Shift + Esc را بزنید تا Task Manager باز شود. از منوی File گزینه Run new task را انتخاب کنید، عبارت explorer.exe را تایپ کرده و Enter بزنید تا همه‌چیز به حالت عادی برگردد. اگر Task Manager باز نشد، سیستم را ریستارت کنید."
+    },
+    { 
+      name: "غیرفعال کردن موس و کیبورد", 
+      cmd: "taskkill /f /im explorer.exe", 
+      desc: "این دستور فقط Taskbar و آیکون‌ها را می‌برد. برای غیرفعال کردن واقعی درایورهای ورودی، کدهای پیچیده‌تر PowerShell نیاز است که معمولاً در محیط‌های شوخی استفاده می‌شود.", 
+      tag: "شیطنت",
+      treatment: "اگر موس و کیبورد از کار افتادند، دکمه پاور را ۵ ثانیه نگه دارید تا سیستم خاموش شود. سپس سیستم را روشن کنید. درایورها معمولاً پس از ریستارت به حالت عادی برمی‌گردند. اگر مشکل ادامه داشت، با فلش نصب بوت کنید و از System Restore استفاده کنید."
+    },
+    { 
+      name: "پر کردن هارد و هنگ کردن سیستم (Fork Bomb)", 
+      cmd: "%0|%0", 
+      desc: "این یک «بمب انشعاب» است که داخل یک فایل bat. نوشته می‌شود و به صورت بی‌نهایت خودش را بازتولید می‌کند و CPU و رم را به طور کامل اشغال می‌کند تا سیستم هنگ کند.", 
+      tag: "هنگ کردن",
+      treatment: "دکمه پاور را نگه دارید تا سیستم به صورت سخت‌افزاری خاموش شود. بعد از روشن کردن مجدد، اگر ویندوز بالا آمد، فایل bat. را پیدا کرده و پاک کنید. اگر ویندوز بالا نیامد، باید با فلش نصب بوت کرده و وارد محیط تعمیر (Repair) شوید تا ویندوز را بازیابی کنید."
+    },
+    { 
+      name: "حذف فایل‌های سیستمی با PowerShell", 
+      cmd: "Remove-Item -Path C:\\Windows\\System32\\* -Recurse -Force", 
+      desc: "حذف کامل پوشه System32 که قلب ویندوز است و باعث می‌شود ویندوز دیگر قادر به کار کردن نباشد. این دستور بسیار خطرناک است و ویندوز را کاملاً از کار می‌اندازد.", 
+      tag: "تخریب سیستم",
+      treatment: "به یک فلش نصب ویندوز نیاز دارید. بهترین راه، اجرای یک Repair Install (نصب ترمیمی) است. فایل ISO ویندوز را از سایت مایکروسافت دانلود کرده و روی فلش رایت کنید. سپس فایل setup.exe را اجرا کنید و گزینه Keep personal files and apps را انتخاب کنید. اگر ویندوز بالا نمی‌آید، باید با فلش بوت کنید و یک نصب تازه (Clean Install) انجام دهید که متأسفانه همه اطلاعاتتان پاک می‌شود."
+    }
+  ]
+};
+
+/* ==================== اسکریپت اصلی ==================== */
+(function() {
+  'use strict';
+
+  // ============ المان‌ها ============
+  const startScreen = document.getElementById('startScreen');
+  const mainScreen = document.getElementById('mainScreen');
+  const startBtn = document.getElementById('startBtn');
+  const musicToggle = document.getElementById('musicToggle');
+  const bgMusic = document.getElementById('bgMusic');
+  const searchInput = document.getElementById('searchInput');
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const gridCP = document.getElementById('grid-cp');
+  const gridSC = document.getElementById('grid-sc');
+  const gridDG = document.getElementById('grid-dg');
+  const countCP = document.getElementById('count-cp');
+  const countSC = document.getElementById('count-sc');
+  const countDG = document.getElementById('count-dg');
+  const toast = document.getElementById('toast');
+  const teacherPhoto = document.getElementById('teacherPhoto');
+  const logoFallback = document.getElementById('logoFallback');
+
+  // ============ موسیقی ============
+  let musicPlaying = false;
+
+  function startMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.3;
+    const p = bgMusic.play();
+    if (p !== undefined) {
+      p.then(() => {
+        musicPlaying = true;
+        musicToggle.textContent = '🎵';
+        musicToggle.classList.remove('muted');
+      }).catch(() => {
+        musicPlaying = false;
+      });
+    }
+  }
+
+  function stopMusic() {
+    if (bgMusic) {
+      bgMusic.pause();
+      musicPlaying = false;
+      musicToggle.textContent = '🔇';
+      musicToggle.classList.add('muted');
+    }
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (musicPlaying) {
+        stopMusic();
+      } else {
+        startMusic();
+      }
+    });
+  }
+
+  // ============ عکس مدرس ============
+  if (teacherPhoto) {
+    const tImg = new Image();
+    tImg.onload = function() {
+      teacherPhoto.textContent = '';
+      tImg.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+      teacherPhoto.appendChild(tImg);
+    };
+    tImg.src = 'teacher.jpg';
+  }
+
+  // ============ لوگو ============
+  if (logoFallback) {
+    const lImg = new Image();
+    lImg.onload = function() {
+      lImg.style.cssText = 'max-width:130px;height:auto;';
+      logoFallback.parentNode.replaceChild(lImg, logoFallback);
+    };
+    lImg.src = 'logo.png';
+  }
+
+  // ============ دکمه شروع ============
+  if (startBtn) {
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      startMusic();
+      startScreen.classList.remove('active');
+      mainScreen.classList.add('active');
+      renderData(); // رندر مجدد داده‌ها هنگام ورود
+    });
+  }
+
+  // ============ توابع کپی و Toast ============
+  let toastTimeout;
+  function showToast(message, isDanger = false) {
+    toast.textContent = message;
+    toast.className = isDanger ? 'danger-toast show' : 'show';
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+      toast.className = '';
+    }, 2000);
+  }
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✅ دستور با موفقیت کپی شد!');
+    }).catch(() => {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('✅ دستور با موفقیت کپی شد!');
+      } catch (err) {
+        showToast('❌ خطا در کپی کردن!', true);
+      }
+      document.body.removeChild(textArea);
+    });
+  }
+
+  // ============ ساخت کارت‌ها ============
+  function createCmdCard(item, isDanger = false) {
+    const card = document.createElement('div');
+    card.className = isDanger ? 'card danger-card' : 'card';
+    
+    const tagClass = isDanger ? 'card-tag danger-tag' : 'card-tag';
+    const tagHtml = item.tag ? `<span class="${tagClass}">${item.tag}</span>` : '';
+    
+    const treatmentHtml = item.treatment ? `
+      <div class="treatment-box">
+        <div>${item.treatment}</div>
+      </div>
+    ` : '';
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-title">${item.name}</span>
+        ${tagHtml}
+      </div>
+      <p class="card-desc">${item.desc}</p>
+      <div class="cmd-box" title="برای کپی کلیک کنید">${item.cmd}</div>
+      ${treatmentHtml}
+    `;
+    
+    const cmdBox = card.querySelector('.cmd-box');
+    cmdBox.addEventListener('click', () => {
+      copyToClipboard(item.cmd);
+    });
+
+    return card;
+  }
+
+  function createShortcutCard(item) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const keysHtml = item.keys.map(k => `<kbd>${k}</kbd>`).join(' + ');
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-title">${item.name}</span>
+      </div>
+      <p class="card-desc">${item.desc}</p>
+      <div class="keys-box">${keysHtml}</div>
+    `;
+    return card;
+  }
+
+  // ============ رندر داده‌ها ============
+  function renderData(searchTerm = '') {
+    const term = searchTerm.toLowerCase().trim();
+    
+    gridCP.innerHTML = '';
+    gridSC.innerHTML = '';
+    gridDG.innerHTML = '';
+
+    const filteredCP = DATA["کنترل پنل"].filter(item => 
+      item.name.toLowerCase().includes(term) || 
+      item.cmd.toLowerCase().includes(term) || 
+      item.desc.toLowerCase().includes(term) ||
+      (item.tag && item.tag.toLowerCase().includes(term))
+    );
+
+    const filteredSC = DATA["میان‌برهای عمومی"].filter(item => 
+      item.name.toLowerCase().includes(term) || 
+      item.desc.toLowerCase().includes(term) ||
+      item.keys.some(k => k.toLowerCase().includes(term))
+    );
+
+    const filteredDG = DATA["کدهای خطرناک"].filter(item => 
+      item.name.toLowerCase().includes(term) || 
+      item.cmd.toLowerCase().includes(term) || 
+      item.desc.toLowerCase().includes(term) ||
+      (item.tag && item.tag.toLowerCase().includes(term)) ||
+      (item.treatment && item.treatment.toLowerCase().includes(term))
+    );
+
+    countCP.textContent = filteredCP.length;
+    countSC.textContent = filteredSC.length;
+    countDG.textContent = filteredDG.length;
+
+    if (filteredCP.length === 0) {
+      gridCP.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
+    } else {
+      filteredCP.forEach(item => gridCP.appendChild(createCmdCard(item, false)));
+    }
+
+    if (filteredSC.length === 0) {
+      gridSC.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
+    } else {
+      filteredSC.forEach(item => gridSC.appendChild(createShortcutCard(item)));
+    }
+
+    if (filteredDG.length === 0) {
+      gridDG.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
+    } else {
+      filteredDG.forEach(item => gridDG.appendChild(createCmdCard(item, true)));
+    }
+  }
+
+  // ============ رویدادها ============
+  searchInput.addEventListener('input', (e) => {
+    renderData(e.target.value);
+  });
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const tabId = btn.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+
+  // ============ مقداردهی اولیه ============
+  document.addEventListener('DOMContentLoaded', () => {
+    // رندر اولیه برای اطمینان
+    renderData();
+    console.log('%c📚 راهنمای جامع ویندوز آماده است!', 'color:#0ea5e9;font-size:18px;font-weight:bold;');
+  });
+
+})();
+</script>
+</body>
+</html>
