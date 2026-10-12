@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>📚 راهنمای جامع ویندوز | کوییز خانواده در اسلام</title>
+<title>📚 راهنمای جامع ویندوز | برنامک ایتا</title>
+<!-- 🔹 کیت توسعه‌دهنده ایتا (Eitaa Web App SDK) -->
+<script src="https://developer.eitaa.com/eitaa-web-app.js"></script>
 <style>
 /* ==================== ریست و تنظیمات کلی ==================== */
 :root {
@@ -47,7 +49,7 @@ body {
   align-items: center;
 }
 
-/* ==================== صفحه شروع (کپی شده از استایل شما) ==================== */
+/* ==================== صفحه شروع ==================== */
 .screen {
   display: none;
   position: fixed;
@@ -300,7 +302,7 @@ body {
   opacity: 0.8;
 }
 
-/* ==================== صفحه اصلی راهنما (استایل قبلی) ==================== */
+/* ==================== صفحه اصلی راهنما ==================== */
 #mainScreen {
   background-color: var(--bg-color);
   display: none;
@@ -704,6 +706,11 @@ kbd {
     <div id="dangerous" class="tab-content">
       <div class="card-grid" id="grid-dg"></div>
     </div>
+    
+    <!-- 🔹 دکمه بستن برنامک (مخصوص ایتا) -->
+    <div style="text-align: center; margin-top: 25px; margin-bottom: 30px;">
+      <button onclick="window.Eitaa?.WebApp.close()" style="background: rgba(255,255,255,0.1); border: 1px solid #334155; color: #94a3b8; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: inherit;">✖️ بستن برنامه</button>
+    </div>
   </div>
 </div>
 
@@ -925,6 +932,16 @@ const DATA = {
   const teacherPhoto = document.getElementById('teacherPhoto');
   const logoFallback = document.getElementById('logoFallback');
 
+  // ============ 🔹 بررسی اتصال به ایتا ============
+  if (window.Eitaa) {
+    console.log("برنامک در محیط ایتا اجرا می‌شود.");
+    // اگر نیاز به اطلاعات کاربر دارید:
+    // const userData = window.Eitaa.WebApp.initData;
+    // console.log("اطلاعات کاربر:", userData);
+  } else {
+    console.log("برنامک در محیط ایتا اجرا نمی‌شود (حالت مرورگر).");
+  }
+
   // ============ موسیقی ============
   let musicPlaying = false;
 
@@ -992,7 +1009,7 @@ const DATA = {
       startMusic();
       startScreen.classList.remove('active');
       mainScreen.classList.add('active');
-      renderData(); // رندر مجدد داده‌ها هنگام ورود
+      renderData();
     });
   }
 
@@ -1141,7 +1158,6 @@ const DATA = {
 
   // ============ مقداردهی اولیه ============
   document.addEventListener('DOMContentLoaded', () => {
-    // رندر اولیه برای اطمینان
     renderData();
     console.log('%c📚 راهنمای جامع ویندوز آماده است!', 'color:#0ea5e9;font-size:18px;font-weight:bold;');
   });
