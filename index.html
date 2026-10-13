@@ -682,7 +682,7 @@ kbd {
   <div class="container">
     <header>
       <h1>🪟 راهنمای جامع ویندوز</h1>
-      <p>دستورات کنترل پنل، میان‌برهای کیبورد و کدهای خطرناک با راه درمان</p>
+      <p>دستورات کنترل پنل، میان‌برهای کیبورد، دستورات CMD و کدهای خطرناک با راه درمان</p>
     </header>
     
     <div class="search-box">
@@ -692,6 +692,7 @@ kbd {
     <div class="tabs">
       <button class="tab-btn active" data-tab="control-panel">⚙️ کنترل پنل <span class="tab-count" id="count-cp">0</span></button>
       <button class="tab-btn" data-tab="shortcuts">⌨️ میان‌برهای عمومی <span class="tab-count" id="count-sc">0</span></button>
+      <button class="tab-btn" data-tab="cmd-commands">📟 دستورات CMD <span class="tab-count" id="count-cmd">0</span></button>
       <button class="tab-btn danger-tab" data-tab="dangerous">☠️ کدهای خطرناک <span class="tab-count" id="count-dg">0</span></button>
     </div>
     
@@ -701,6 +702,10 @@ kbd {
     
     <div id="shortcuts" class="tab-content">
       <div class="card-grid" id="grid-sc"></div>
+    </div>
+    
+    <div id="cmd-commands" class="tab-content">
+      <div class="card-grid" id="grid-cmd"></div>
     </div>
     
     <div id="dangerous" class="tab-content">
@@ -849,62 +854,316 @@ const DATA = {
     { name: "باز کردن جستجوی فیدبک", keys: ["Win", "F"], desc: "باز کردن Feedback Hub" },
     { name: "باز کردن Windows Ink", keys: ["Win", "O"], desc: "قفل کردن جهت صفحه نمایش" }
   ],
+  "دستورات CMD": [
+    { name: "ASSOC", cmd: "assoc", desc: "نمایش یا تغییر ارتباط پسوند فایل‌ها", tag: "فایل" },
+    { name: "ATTRIB", cmd: "attrib", desc: "نمایش یا تغییر ویژگی‌های فایل (مخفی، فقط خواندنی و...)", tag: "فایل" },
+    { name: "BREAK", cmd: "break", desc: "فعال یا غیرفعال کردن بررسی CTRL+C", tag: "سیستم" },
+    { name: "BCDEDIT", cmd: "bcdedit", desc: "تنظیمات پایگاه داده بوت برای کنترل بوت شدن", tag: "بوت" },
+    { name: "CACLS", cmd: "cacls", desc: "نمایش یا تغییر لیست کنترل دسترسی (ACL) فایل‌ها", tag: "امنیت" },
+    { name: "CALL", cmd: "call", desc: "فراخوانی یک برنامه دسته‌ای از برنامه دیگر", tag: "اسکریپت" },
+    { name: "CD", cmd: "cd", desc: "نمایش نام یا تغییر دایرکتوری فعلی", tag: "مسیر" },
+    { name: "CHCP", cmd: "chcp", desc: "نمایش یا تنظیم شماره صفحه کد فعال", tag: "سیستم" },
+    { name: "CHDIR", cmd: "chdir", desc: "نمایش نام یا تغییر دایرکتوری فعلی", tag: "مسیر" },
+    { name: "CHKDSK", cmd: "chkdsk", desc: "بررسی دیسک و نمایش گزارش وضعیت", tag: "دیسک" },
+    { name: "CHKNTFS", cmd: "chkntfs", desc: "نمایش یا تغییر بررسی دیسک در زمان بوت", tag: "دیسک" },
+    { name: "CLS", cmd: "cls", desc: "پاک کردن صفحه نمایش", tag: "سیستم" },
+    { name: "CMD", cmd: "cmd", desc: "شروع یک نمونه جدید از مفسر خط فرمان", tag: "سیستم" },
+    { name: "COLOR", cmd: "color", desc: "تنظیم رنگ پیش‌زمینه و پس‌زمینه کنسول", tag: "ظاهر" },
+    { name: "COMP", cmd: "comp", desc: "مقایسه محتویات دو فایل یا مجموعه فایل", tag: "فایل" },
+    { name: "COMPACT", cmd: "compact", desc: "نمایش یا تغییر فشرده‌سازی فایل‌ها در NTFS", tag: "دیسک" },
+    { name: "CONVERT", cmd: "convert", desc: "تبدیل حجم FAT به NTFS", tag: "دیسک" },
+    { name: "COPY", cmd: "copy", desc: "کپی یک یا چند فایل به مکان دیگر", tag: "فایل" },
+    { name: "DATE", cmd: "date", desc: "نمایش یا تنظیم تاریخ", tag: "سیستم" },
+    { name: "DEL", cmd: "del", desc: "حذف یک یا چند فایل", tag: "فایل" },
+    { name: "DIR", cmd: "dir", desc: "نمایش لیست فایل‌ها و زیرشاخه‌های یک دایرکتوری", tag: "فایل" },
+    { name: "DISKPART", cmd: "diskpart", desc: "نمایش یا تنظیم ویژگی‌های پارتیشن دیسک", tag: "دیسک" },
+    { name: "DOSKEY", cmd: "doskey", desc: "ویرایش خطوط فرمان و ایجاد ماکرو", tag: "سیستم" },
+    { name: "DRIVERQUERY", cmd: "driverquery", desc: "نمایش وضعیت و ویژگی‌های درایورهای دستگاه", tag: "سیستم" },
+    { name: "ECHO", cmd: "echo", desc: "نمایش پیام یا روشن/خاموش کردن echo", tag: "اسکریپت" },
+    { name: "ENDLOCAL", cmd: "endlocal", desc: "پایان محلی‌سازی تغییرات محیطی در فایل دسته‌ای", tag: "اسکریپت" },
+    { name: "ERASE", cmd: "erase", desc: "حذف یک یا چند فایل", tag: "فایل" },
+    { name: "EXIT", cmd: "exit", desc: "خروج از برنامه CMD.EXE", tag: "سیستم" },
+    { name: "FC", cmd: "fc", desc: "مقایسه دو فایل و نمایش تفاوت‌ها", tag: "فایل" },
+    { name: "FIND", cmd: "find", desc: "جستجوی یک رشته متنی در فایل‌ها", tag: "جستجو" },
+    { name: "FINDSTR", cmd: "findstr", desc: "جستجوی رشته‌ها در فایل‌ها", tag: "جستجو" },
+    { name: "FOR", cmd: "for", desc: "اجرای یک دستور برای هر فایل در یک مجموعه", tag: "اسکریپت" },
+    { name: "FORMAT", cmd: "format", desc: "فرمت یک دیسک برای استفاده در ویندوز", tag: "دیسک" },
+    { name: "FSUTIL", cmd: "fsutil", desc: "نمایش یا تنظیم ویژگی‌های سیستم فایل", tag: "دیسک" },
+    { name: "FTYPE", cmd: "ftype", desc: "نمایش یا تغییر انواع فایل استفاده شده در ارتباط پسوند", tag: "فایل" },
+    { name: "GOTO", cmd: "goto", desc: "هدایت مفسر به یک خط برچسب‌دار در برنامه دسته‌ای", tag: "اسکریپت" },
+    { name: "GPRESULT", cmd: "gpresult", desc: "نمایش اطلاعات خط‌مشی گروهی برای ماشین یا کاربر", tag: "شبکه" },
+    { name: "GRAFTABL", cmd: "graftabl", desc: "فعال کردن نمایش مجموعه کاراکترهای گسترده در گرافیک", tag: "سیستم" },
+    { name: "HELP", cmd: "help", desc: "ارائه اطلاعات راهنما برای دستورات ویندوز", tag: "کمک" },
+    { name: "ICACLS", cmd: "icacls", desc: "نمایش، تغییر، پشتیبان‌گیری یا بازیابی ACL فایل‌ها", tag: "امنیت" },
+    { name: "IF", cmd: "if", desc: "انجام پردازش شرطی در برنامه‌های دسته‌ای", tag: "اسکریپت" },
+    { name: "LABEL", cmd: "label", desc: "ایجاد، تغییر یا حذف برچسب حجم یک دیسک", tag: "دیسک" },
+    { name: "MD", cmd: "md", desc: "ایجاد یک دایرکتوری", tag: "فایل" },
+    { name: "MKDIR", cmd: "mkdir", desc: "ایجاد یک دایرکتوری", tag: "فایل" },
+    { name: "MKLINK", cmd: "mklink", desc: "ایجاد لینک‌های نمادین و سخت", tag: "فایل" },
+    { name: "MODE", cmd: "mode", desc: "تنظیم یک دستگاه سیستم", tag: "سیستم" },
+    { name: "MORE", cmd: "more", desc: "نمایش خروجی به صورت صفحه به صفحه", tag: "سیستم" },
+    { name: "MOVE", cmd: "move", desc: "انتقال یک یا چند فایل از یک دایرکتوری به دایرکتوری دیگر", tag: "فایل" },
+    { name: "OPENFILES", cmd: "openfiles", desc: "نمایش فایل‌های باز شده توسط کاربران راه دور", tag: "شبکه" },
+    { name: "PATH", cmd: "path", desc: "نمایش یا تنظیم مسیر جستجوی فایل‌های اجرایی", tag: "سیستم" },
+    { name: "PAUSE", cmd: "pause", desc: "توقف پردازش یک فایل دسته‌ای و نمایش پیام", tag: "اسکریپت" },
+    { name: "POPD", cmd: "popd", desc: "بازیابی مقدار قبلی دایرکتوری فعلی ذخیره شده توسط PUSHD", tag: "مسیر" },
+    { name: "PRINT", cmd: "print", desc: "چاپ یک فایل متنی", tag: "چاپ" },
+    { name: "PROMPT", cmd: "prompt", desc: "تغییر اعلان فرمان ویندوز", tag: "سیستم" },
+    { name: "PUSHD", cmd: "pushd", desc: "ذخیره دایرکتوری فعلی و سپس تغییر آن", tag: "مسیر" },
+    { name: "RD", cmd: "rd", desc: "حذف یک دایرکتوری", tag: "فایل" },
+    { name: "RECOVER", cmd: "recover", desc: "بازیابی اطلاعات خواندنی از یک دیسک خراب", tag: "دیسک" },
+    { name: "REM", cmd: "rem", desc: "ثبت نظرات در فایل‌های دسته‌ای", tag: "اسکریپت" },
+    { name: "REN", cmd: "ren", desc: "تغییر نام یک یا چند فایل", tag: "فایل" },
+    { name: "RENAME", cmd: "rename", desc: "تغییر نام یک یا چند فایل", tag: "فایل" },
+    { name: "REPLACE", cmd: "replace", desc: "جایگزینی فایل‌ها", tag: "فایل" },
+    { name: "RMDIR", cmd: "rmdir", desc: "حذف یک دایرکتوری", tag: "فایل" },
+    { name: "ROBOCOPY", cmd: "robocopy", desc: "ابزار پیشرفته کپی فایل‌ها و درخت دایرکتوری", tag: "فایل" },
+    { name: "SET", cmd: "set", desc: "نمایش، تنظیم یا حذف متغیرهای محیطی ویندوز", tag: "سیستم" },
+    { name: "SETLOCAL", cmd: "setlocal", desc: "آغاز محلی‌سازی تغییرات محیطی در فایل دسته‌ای", tag: "اسکریپت" },
+    { name: "SC", cmd: "sc", desc: "نمایش یا تنظیم سرویس‌ها (فرآیندهای پس‌زمینه)", tag: "سرویس" },
+    { name: "SCHTASKS", cmd: "schtasks", desc: "زمان‌بندی اجرای دستورات و برنامه‌ها روی کامپیوتر", tag: "سرویس" },
+    { name: "SHIFT", cmd: "shift", desc: "جابجایی موقعیت پارامترهای جایگزین در فایل‌های دسته‌ای", tag: "اسکریپت" },
+    { name: "SHUTDOWN", cmd: "shutdown", desc: "امکان خاموش کردن محلی یا راه دور دستگاه", tag: "سیستم" },
+    { name: "SORT", cmd: "sort", desc: "مرتب‌سازی ورودی", tag: "سیستم" },
+    { name: "START", cmd: "start", desc: "شروع یک پنجره جداگانه برای اجرای یک برنامه یا دستور", tag: "سیستم" },
+    { name: "SUBST", cmd: "subst", desc: "ارتباط یک مسیر با یک حرف درایو", tag: "دیسک" },
+    { name: "SYSTEMINFO", cmd: "systeminfo", desc: "نمایش ویژگی‌ها و تنظیمات خاص ماشین", tag: "سیستم" },
+    { name: "TASKLIST", cmd: "tasklist", desc: "نمایش تمام وظایف در حال اجرا شامل سرویس‌ها", tag: "سیستم" },
+    { name: "TASKKILL", cmd: "taskkill", desc: "کشتن یا متوقف کردن یک فرآیند یا برنامه در حال اجرا", tag: "سیستم" },
+    { name: "TIME", cmd: "time", desc: "نمایش یا تنظیم زمان سیستم", tag: "سیستم" },
+    { name: "TITLE", cmd: "title", desc: "تنظیم عنوان پنجره برای یک جلسه CMD.EXE", tag: "ظاهر" },
+    { name: "TREE", cmd: "tree", desc: "نمایش گرافیکی ساختار دایرکتوری یک درایو یا مسیر", tag: "فایل" },
+    { name: "TYPE", cmd: "type", desc: "نمایش محتویات یک فایل متنی", tag: "فایل" },
+    { name: "VER", cmd: "ver", desc: "نمایش نسخه ویندوز", tag: "سیستم" },
+    { name: "VERIFY", cmd: "verify", desc: "تعیین اینکه ویندوز صحت نوشتن فایل‌ها را بررسی کند", tag: "دیسک" },
+    { name: "VOL", cmd: "vol", desc: "نمایش برچسب و شماره سریال یک دیسک", tag: "دیسک" },
+    { name: "XCOPY", cmd: "xcopy", desc: "کپی فایل‌ها و درخت‌های دایرکتوری", tag: "فایل" },
+    { name: "WMIC", cmd: "wmic", desc: "نمایش اطلاعات WMI در پوسته فرمان تعاملی", tag: "سیستم" }
+  ],
   "کدهای خطرناک": [
-    { 
-      name: "پاک کردن کل درایو", 
-      cmd: "format C: /q", 
-      desc: "فرمت سریع درایو C یا حذف اجباری تمام فایل‌های آن بدون هیچ هشداری. این دستور کل اطلاعات درایو ویندوز را از بین می‌برد.", 
+    {
+      name: "پاک کردن کل درایو",
+      cmd: "format C: /q",
+      desc: "فرمت سریع درایو C یا حذف اجباری تمام فایل‌های آن بدون هیچ هشداری. این دستور کل اطلاعات درایو ویندوز را از بین می‌برد [citation:5][citation:7].",
       tag: "تخریب فایل",
       treatment: "اگر فقط درایو C پاک شده اما فایل‌های شخصی روی درایوهای دیگر دارید، باید ویندوز را دوباره نصب کنید. به یک فلش مموری حداقل ۸ گیگابایتی و یک کامپیوتر سالم دیگر نیاز دارید. با ابزار رسمی Media Creation Tool مایکروسافت، یک فلش بوت‌بل بسازید و از طریق آن ویندوز را نصب کنید."
     },
-    { 
-      name: "حذف اجباری فایل‌های درایو", 
-      cmd: "del /f /s /q C:\\*.*", 
-      desc: "حذف تمام فایل‌های درایو C به صورت بازگشتی (Recursive) و بدون هیچ پیام تأییدی. این دستور سکوت‌آمیز است و اجازه بازگشت نمی‌دهد.", 
+    {
+      name: "حذف اجباری فایل‌های درایو",
+      cmd: "del /f /s /q C:\\*.*",
+      desc: "حذف تمام فایل‌های درایو C به صورت بازگشتی (Recursive) و بدون هیچ پیام تأییدی. این دستور سکوت‌آمیز است و اجازه بازگشت نمی‌دهد [citation:5][citation:7].",
       tag: "تخریب فایل",
       treatment: "اگر ویندوز بالا نمی‌آید، با فلش نصب ویندوز بوت کنید و از گزینه Repair your computer استفاده کنید. در Command Prompt دستور sfc /scannow را اجرا کنید. اگر فایل‌های سیستمی قابل بازیابی نبودند، نصب تازه ویندوز تنها گزینه است."
     },
-    { 
-      name: "خراب کردن بوت (غیرفعال کردن Recovery)", 
-      cmd: "bcdedit /set {default} recoveryenabled No", 
-      desc: "غیرفعال کردن قابلیت بازیابی ویندوز. پس از اجرای این دستور، در صورت خرابی ویندوز نمی‌توانید از حالت Recovery استفاده کنید.", 
+    {
+      name: "خراب کردن بوت (غیرفعال کردن Recovery)",
+      cmd: "bcdedit /set {default} recoveryenabled No",
+      desc: "غیرفعال کردن قابلیت بازیابی ویندوز. پس از اجرای این دستور، در صورت خرابی ویندوز نمی‌توانید از حالت Recovery استفاده کنید [citation:4][citation:9].",
       tag: "خرابی بوت",
       treatment: "با یک فلش نصب ویندوز بوت کنید. در صفحه نصب، گزینه Repair your computer را انتخاب کنید و وارد Command Prompt شوید. دستور bcdedit /set {default} recoveryenabled Yes را اجرا کنید تا قابلیت بازیابی دوباره فعال شود."
     },
-    { 
-      name: "نادیده گرفتن خطاهای بوت", 
-      cmd: "bcdedit /set {default} bootstatuspolicy ignoreallfailures", 
-      desc: "مجبور کردن ویندوز به تلاش برای بوت در حالت عادی، حتی وقتی فایل‌های حیاتی خراب شده‌اند. این باعث می‌شود ویندوز به جای نمایش خطا، مستقیم کرش کند و به صفحه آبی مرگ بیفتد.", 
+    {
+      name: "نادیده گرفتن خطاهای بوت",
+      cmd: "bcdedit /set {default} bootstatuspolicy ignoreallfailures",
+      desc: "مجبور کردن ویندوز به تلاش برای بوت در حالت عادی، حتی وقتی فایل‌های حیاتی خراب شده‌اند. این باعث می‌شود ویندوز به جای نمایش خطا، مستقیم کرش کند و به صفحه آبی مرگ بیفتد [citation:4][citation:12].",
       tag: "خرابی بوت",
       treatment: "با فلش نصب بوت کنید و وارد Command Prompt شوید. دستور bootrec /fixmbr و سپس bootrec /fixboot و bootrec /rebuildbcd را اجرا کنید. اگر مشکل حل نشد، دستور bcdedit /set {default} bootstatuspolicy DisplayAllFailures را اجرا کنید تا خطاها نمایش داده شوند."
     },
-    { 
-      name: "از کار انداختن Taskbar و آیکون‌ها", 
-      cmd: "taskkill /f /im explorer.exe", 
-      desc: "بستن ناگهانی فرآیند Windows Explorer که مسئول نوار وظیفه (Taskbar)، منوی استارت و آیکون‌های دسکتاپ است. این مورد خطرناک نیست و با ریستارت ساده درست می‌شود.", 
+    {
+      name: "از کار انداختن Taskbar و آیکون‌ها",
+      cmd: "taskkill /f /im explorer.exe",
+      desc: "بستن ناگهانی فرآیند Windows Explorer که مسئول نوار وظیفه (Taskbar)، منوی استارت و آیکون‌های دسکتاپ است [citation:7].",
       tag: "شیطنت",
       treatment: "کلیدهای Ctrl + Shift + Esc را بزنید تا Task Manager باز شود. از منوی File گزینه Run new task را انتخاب کنید، عبارت explorer.exe را تایپ کرده و Enter بزنید تا همه‌چیز به حالت عادی برگردد. اگر Task Manager باز نشد، سیستم را ریستارت کنید."
     },
-    { 
-      name: "غیرفعال کردن موس و کیبورد", 
-      cmd: "taskkill /f /im explorer.exe", 
-      desc: "این دستور فقط Taskbar و آیکون‌ها را می‌برد. برای غیرفعال کردن واقعی درایورهای ورودی، کدهای پیچیده‌تر PowerShell نیاز است که معمولاً در محیط‌های شوخی استفاده می‌شود.", 
+    {
+      name: "غیرفعال کردن موس و کیبورد",
+      cmd: "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\Mouclass /f",
+      desc: "حذف کلید رجیستری مربوط به درایور موس که باعث از کار افتادن موس می‌شود. این کد برای شیطنت استفاده می‌شود [citation:7][citation:19].",
       tag: "شیطنت",
-      treatment: "اگر موس و کیبورد از کار افتادند، دکمه پاور را ۵ ثانیه نگه دارید تا سیستم خاموش شود. سپس سیستم را روشن کنید. درایورها معمولاً پس از ریستارت به حالت عادی برمی‌گردند. اگر مشکل ادامه داشت، با فلش نصب بوت کنید و از System Restore استفاده کنید."
+      treatment: "اگر موس از کار افتاد، با کیبورد (کلیدهای Tab، Enter و جهت‌نماها) به Device Manager بروید و از منوی Action گزینه Scan for hardware changes را انتخاب کنید. یا در Command Prompt دستور sfc /scannow را اجرا کنید."
     },
-    { 
-      name: "پر کردن هارد و هنگ کردن سیستم (Fork Bomb)", 
-      cmd: "%0|%0", 
-      desc: "این یک «بمب انشعاب» است که داخل یک فایل bat. نوشته می‌شود و به صورت بی‌نهایت خودش را بازتولید می‌کند و CPU و رم را به طور کامل اشغال می‌کند تا سیستم هنگ کند.", 
+    {
+      name: "پر کردن هارد و هنگ کردن سیستم (Fork Bomb)",
+      cmd: "%0|%0",
+      desc: "این یک «بمب انشعاب» است که داخل یک فایل bat. نوشته می‌شود و به صورت بی‌نهایت خودش را بازتولید می‌کند و CPU و رم را به طور کامل اشغال می‌کند تا سیستم هنگ کند [citation:3][citation:8][citation:15].",
       tag: "هنگ کردن",
       treatment: "دکمه پاور را نگه دارید تا سیستم به صورت سخت‌افزاری خاموش شود. بعد از روشن کردن مجدد، اگر ویندوز بالا آمد، فایل bat. را پیدا کرده و پاک کنید. اگر ویندوز بالا نیامد، باید با فلش نصب بوت کرده و وارد محیط تعمیر (Repair) شوید تا ویندوز را بازیابی کنید."
     },
-    { 
-      name: "حذف فایل‌های سیستمی با PowerShell", 
-      cmd: "Remove-Item -Path C:\\Windows\\System32\\* -Recurse -Force", 
-      desc: "حذف کامل پوشه System32 که قلب ویندوز است و باعث می‌شود ویندوز دیگر قادر به کار کردن نباشد. این دستور بسیار خطرناک است و ویندوز را کاملاً از کار می‌اندازد.", 
+    {
+      name: "حذف فایل‌های سیستمی با PowerShell",
+      cmd: "Remove-Item -Path C:\\Windows\\System32\\* -Recurse -Force",
+      desc: "حذف کامل پوشه System32 که قلب ویندوز است و باعث می‌شود ویندوز دیگر قادر به کار کردن نباشد [citation:7].",
       tag: "تخریب سیستم",
-      treatment: "به یک فلش نصب ویندوز نیاز دارید. بهترین راه، اجرای یک Repair Install (نصب ترمیمی) است. فایل ISO ویندوز را از سایت مایکروسافت دانلود کرده و روی فلش رایت کنید. سپس فایل setup.exe را اجرا کنید و گزینه Keep personal files and apps را انتخاب کنید. اگر ویندوز بالا نمی‌آید، باید با فلش بوت کنید و یک نصب تازه (Clean Install) انجام دهید که متأسفانه همه اطلاعاتتان پاک می‌شود."
+      treatment: "به یک فلش نصب ویندوز نیاز دارید. بهترین راه، اجرای یک Repair Install (نصب ترمیمی) است. فایل ISO ویندوز را از سایت مایکروسافت دانلود کرده و روی فلش رایت کنید. سپس فایل setup.exe را اجرا کنید و گزینه Keep personal files and apps را انتخاب کنید."
+    },
+    {
+      name: "بمب انشعاب بی‌نهایت (Endless Loop)",
+      cmd: ":loop\\nstart cmd.exe\\ngoto loop",
+      desc: "باز کردن بی‌نهایت پنجره خط فرمان (Command Prompt) تا زمانی که حافظه رم پر شود و سیستم هنگ کند [citation:7][citation:13].",
+      tag: "هنگ کردن",
+      treatment: "با فشردن Ctrl+Shift+Esc وارد Task Manager شوید و تمام فرآیندهای cmd.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را ۵ ثانیه نگه دارید تا سیستم خاموش شود."
+    },
+    {
+      name: "باز کردن بی‌نهایت Notepad",
+      cmd: "start notepad.exe\\ngoto loop",
+      desc: "باز کردن بی‌نهایت برنامه Notepad که باعث اشغال شدن منابع سیستم و هنگ کردن آن می‌شود [citation:19].",
+      tag: "هنگ کردن",
+      treatment: "با Ctrl+Shift+Esc وارد Task Manager شوید و تمام فرآیندهای notepad.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را نگه دارید."
+    },
+    {
+      name: "پر کردن هارد با فایل‌های خالی",
+      cmd: "for /L %i in (1,1,1000000) do type nul > file%i.txt",
+      desc: "ایجاد تعداد بسیار زیادی فایل خالی در پوشه جاری که باعث پر شدن سریع فضای هارد دیسک می‌شود [citation:7].",
+      tag: "پر کردن هارد",
+      treatment: "اگر ویندوز بالا می‌آید، به پوشه‌ای که فایل‌ها در آن ساخته شده‌اند بروید و همه را انتخاب و حذف کنید. اگر ویندوز بالا نمی‌آید، با فلش نصب بوت کنید و از Command Prompt دستور del /f /q *.txt را در مسیر مربوطه اجرا کنید."
+    },
+    {
+      name: "غیرفعال کردن Task Manager",
+      cmd: "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v DisableTaskMgr /t REG_DWORD /d 1 /f",
+      desc: "غیرفعال کردن برنامه Task Manager از طریق رجیستری تا کاربر نتواند فرآیندهای مخرب را ببندد [citation:7][citation:13].",
+      tag: "محدودیت",
+      treatment: "با استفاده از Run (کلید Win + R) عبارت regedit را تایپ کنید. به مسیر HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System بروید و مقدار DisableTaskMgr را حذف کنید یا به 0 تغییر دهید."
+    },
+    {
+      name: "غیرفعال کردن خط فرمان (CMD)",
+      cmd: "reg add HKCU\\Software\\Policies\\Microsoft\\Windows\\System /v DisableCMD /t REG_DWORD /d 1 /f",
+      desc: "غیرفعال کردن دسترسی به Command Prompt از طریق رجیستری [citation:7].",
+      tag: "محدودیت",
+      treatment: "با استفاده از Run (Win + R) عبارت regedit را تایپ کنید. به مسیر HKCU\\Software\\Policies\\Microsoft\\Windows\\System بروید و مقدار DisableCMD را حذف کنید."
+    },
+    {
+      name: "تغییر نام همه فایل‌های یک درایو",
+      cmd: "ren *.doc *.txt\\nren *.jpg *.txt\\nren *.exe *.txt",
+      desc: "تغییر پسوند تمام فایل‌های یک دایرکتوری که باعث از کار افتادن برنامه‌ها و باز نشدن فایل‌ها می‌شود [citation:2][citation:19].",
+      tag: "تخریب فایل",
+      treatment: "به صورت دستی یا با استفاده از نرم‌افزارهای بازیابی فایل، پسوند اصلی فایل‌ها را برگردانید. اگر تعداد فایل‌ها زیاد است، از دستور ren *.txt *.doc (برای هر نوع فایل به صورت جداگانه) استفاده کنید."
+    },
+    {
+      name: "خراب کردن رجیستری (حذف کلیدهای عمومی)",
+      cmd: "reg delete HKCR /f",
+      desc: "حذف کلیدهای اصلی رجیستری که باعث از کار افتادن انجمن فایل‌ها و برنامه‌ها می‌شود [citation:7][citation:11].",
+      tag: "تخریب سیستم",
+      treatment: "اگر ویندوز بالا می‌آید، از System Restore (rstrui) استفاده کنید. اگر بالا نمی‌آید، با فلش نصب بوت کرده و Repair your computer را انتخاب کنید و سپس Startup Repair را اجرا کنید."
+    },
+    {
+      name: "تغییر پسوند فایل‌ها به txt (Corrupt Files)",
+      cmd: "ren *.exe *.txt",
+      desc: "تغییر پسوند تمام فایل‌های اجرایی به txt که باعث از کار افتادن برنامه‌ها می‌شود [citation:2][citation:19].",
+      tag: "تخریب فایل",
+      treatment: "با استفاده از Command Prompt در حالت ادمین، دستور ren *.txt *.exe را در مسیر مربوطه اجرا کنید. دقت کنید که فقط فایل‌های exe را برگردانید."
+    },
+    {
+      name: "غیرفعال کردن فایروال ویندوز",
+      cmd: "netsh firewall set opmode mode=disable",
+      desc: "غیرفعال کردن فایروال ویندوز که امنیت سیستم را به خطر می‌اندازد [citation:7][citation:11].",
+      tag: "امنیت",
+      treatment: "با استفاده از کنترل پنل (firewall.cpl) یا از طریق Command Prompt در حالت ادمین، دستور netsh firewall set opmode mode=enable را اجرا کنید."
+    },
+    {
+      name: "غیرفعال کردن شبکه (Disable Internet)",
+      cmd: "ipconfig /release_all",
+      desc: "آزاد کردن تمام آدرس‌های IP که باعث قطع شدن اتصال اینترنت می‌شود. این کد معمولاً در یک حلقه بی‌نهایت اجرا می‌شود [citation:2][citation:11].",
+      tag: "شبکه",
+      treatment: "با استفاده از Command Prompt در حالت ادمین، دستور ipconfig /renew را اجرا کنید یا سیستم را ریستارت کنید."
+    },
+    {
+      name: "حذف فایل‌های بوت (boot.ini)",
+      cmd: "del C:\\boot.ini",
+      desc: "حذف فایل تنظیمات بوت در ویندوزهای قدیمی‌تر که باعث عدم بوت شدن سیستم می‌شود [citation:2].",
+      tag: "خرابی بوت",
+      treatment: "با فلش نصب بوت کنید و وارد Recovery Console شوید. دستور bootcfg /rebuild را اجرا کنید تا فایل بوت بازسازی شود."
+    },
+    {
+      name: "خاموش کردن سیستم با پیام",
+      cmd: "shutdown -s -t 7 -c \"A VIRUS IS TAKING OVER\"",
+      desc: "خاموش کردن سیستم با تأخیر ۷ ثانیه و نمایش پیام جعلی ویروس برای ترساندن کاربر [citation:2].",
+      tag: "شیطنت",
+      treatment: "با دستور shutdown /a در Run (Win + R) عملیات خاموش شدن را لغو کنید."
+    },
+    {
+      name: "ریستارت خودکار در هر بوت",
+      cmd: "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v WindowsAPI /t REG_SZ /d C:\\windows\\hartell.bat /f",
+      desc: "افزودن یک برنامه به استارت‌آپ ویندوز که باعث ریستارت شدن سیستم در هر بار روشن شدن می‌شود [citation:2].",
+      tag: "خرابی بوت",
+      treatment: "با فلش نصب بوت کنید یا از Safe Mode وارد شوید. با regedit مسیر HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run را باز کنید و مقدار WindowsAPI را حذف کنید."
+    },
+    {
+      name: "خالی کردن سطل بازیافت با دستور",
+      cmd: "rd /s /q C:\\$Recycle.Bin",
+      desc: "حذف پوشه سطل بازیافت که باعث پاک شدن دائمی فایل‌های حذف شده می‌شود [citation:5].",
+      tag: "تخریب فایل",
+      treatment: "این عمل قابل بازگشت نیست. سطل بازیافت به صورت خودکار توسط ویندوز بازسازی می‌شود، اما فایل‌های داخل آن از بین رفته‌اند."
+    },
+    {
+      name: "بستن اجباری برنامه‌ها (Taskkill)",
+      cmd: "taskkill /f /im notepad.exe /im calc.exe",
+      desc: "بستن اجباری برنامه‌های در حال اجرا بدون ذخیره اطلاعات که می‌تواند باعث از دست رفتن داده‌ها شود [citation:7].",
+      tag: "شیطنت",
+      treatment: "هیچ راه درمانی برای اطلاعات ذخیره نشده وجود ندارد. برنامه‌ها را دوباره باز کنید و از این پس مرتب ذخیره کنید (Ctrl+S)."
+    },
+    {
+      name: "تغییر تاریخ سیستم به تاریخ گذشته",
+      cmd: "date 01/01/2000",
+      desc: "تغییر تاریخ سیستم به سال ۲۰۰۰ که می‌تواند باعث بروز مشکل در برنامه‌ها و گواهی‌های امنیتی شود [citation:7].",
+      tag: "سیستم",
+      treatment: "با دستور date در Command Prompt یا از طریق تنظیمات ویندوز (timedate.cpl) تاریخ صحیح را وارد کنید."
+    },
+    {
+      name: "ایجاد حلقه بی‌نهایت باز کردن مرورگر",
+      cmd: ":loop\\nstart msedge\\ngoto loop",
+      desc: "باز کردن بی‌نهایت مرورگر Edge که باعث اشغال کامل منابع سیستم می‌شود [citation:7].",
+      tag: "هنگ کردن",
+      treatment: "با Ctrl+Shift+Esc وارد Task Manager شوید و تمام فرآیندهای msedge.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را نگه دارید."
+    },
+    {
+      name: "غیرفعال کردن صدای سیستم",
+      cmd: "net stop Audiosrv",
+      desc: "توقف سرویس صوتی ویندوز که باعث قطع شدن صدا می‌شود [citation:7].",
+      tag: "سیستم",
+      treatment: "با Command Prompt در حالت ادمین، دستور net start Audiosrv را اجرا کنید یا سیستم را ریستارت کنید."
+    },
+    {
+      name: "خالی کردن فایل hosts",
+      cmd: "echo. > C:\\Windows\\System32\\drivers\\etc\\hosts",
+      desc: "خالی کردن فایل hosts که می‌تواند باعث بروز مشکل در دسترسی به برخی سایت‌ها شود [citation:7].",
+      tag: "شبکه",
+      treatment: "فایل hosts را با Notepad باز کنید و محتوای پیش‌فرض آن را (که معمولاً با کامنت‌های توضیحی شروع می‌شود) بازگردانید یا از یک نسخه پشتیبان استفاده کنید."
+    },
+    {
+      name: "مخفی کردن همه فایل‌ها",
+      cmd: "attrib +h +s +r C:\\* /s /d",
+      desc: "مخفی و سیستمی کردن تمام فایل‌ها و پوشه‌ها که باعث می‌شود کاربر فکر کند فایل‌هایش ناپدید شده‌اند [citation:13].",
+      tag: "شیطنت",
+      treatment: "در Command Prompt دستور attrib -h -s -r C:\\* /s /d را اجرا کنید تا ویژگی‌های مخفی و سیستمی از فایل‌ها برداشته شود."
+    },
+    {
+      name: "تغییر انجمن فایل txt به bat",
+      cmd: "assoc .txt=batfile",
+      desc: "تغییر انجمن فایل‌های متنی به فایل‌های دسته‌ای که باعث اجرای کدهای مخرب با باز کردن فایل‌های txt می‌شود [citation:13].",
+      tag: "امنیت",
+      treatment: "در Command Prompt دستور assoc .txt=txtfile را اجرا کنید تا انجمن فایل به حالت عادی برگردد."
+    },
+    {
+      name: "خاموش کردن اجباری در زمان مشخص",
+      cmd: "shutdown -s -t 0",
+      desc: "خاموش کردن فوری سیستم بدون هیچ هشداری که می‌تواند باعث از دست رفتن اطلاعات ذخیره نشده شود [citation:7].",
+      tag: "سیستم",
+      treatment: "این عمل قابل لغو نیست مگر قبل از اجرای آن. همیشه قبل از کار با دستورات ناشناس، اطلاعات خود را ذخیره کنید."
+    },
+    {
+      name: "حذف فایل autoexec.bat",
+      cmd: "del C:\\autoexec.bat",
+      desc: "حذف فایل خودکار اجرا در ویندوزهای قدیمی که می‌تواند باعث بروز مشکل در بوت سیستم شود [citation:2].",
+      tag: "خرابی بوت",
+      treatment: "این فایل در ویندوزهای مدرن استفاده نمی‌شود. اگر سیستم بوت نمی‌شود، با فلش نصب بوت کنید و Startup Repair را اجرا کنید."
+    },
+    {
+      name: "ایجاد پیام بی‌نهایت",
+      cmd: ":MESSAGE\\nmsg * \"YOUR SYSTEM IS CORRUPTED\"\\nGOTO MESSAGE",
+      desc: "نمایش بی‌نهایت پیام هشدار جعلی که باعث آزار کاربر و اشغال منابع می‌شود [citation:13].",
+      tag: "شیطنت",
+      treatment: "با Ctrl+Shift+Esc وارد Task Manager شوید و فرآیند msg.exe یا cmd.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را نگه دارید."
     }
   ]
 };
@@ -924,9 +1183,11 @@ const DATA = {
   const tabContents = document.querySelectorAll('.tab-content');
   const gridCP = document.getElementById('grid-cp');
   const gridSC = document.getElementById('grid-sc');
+  const gridCMD = document.getElementById('grid-cmd');
   const gridDG = document.getElementById('grid-dg');
   const countCP = document.getElementById('count-cp');
   const countSC = document.getElementById('count-sc');
+  const countCMD = document.getElementById('count-cmd');
   const countDG = document.getElementById('count-dg');
   const toast = document.getElementById('toast');
   const teacherPhoto = document.getElementById('teacherPhoto');
@@ -935,9 +1196,6 @@ const DATA = {
   // ============ 🔹 بررسی اتصال به ایتا ============
   if (window.Eitaa) {
     console.log("برنامک در محیط ایتا اجرا می‌شود.");
-    // اگر نیاز به اطلاعات کاربر دارید:
-    // const userData = window.Eitaa.WebApp.initData;
-    // console.log("اطلاعات کاربر:", userData);
   } else {
     console.log("برنامک در محیط ایتا اجرا نمی‌شود (حالت مرورگر).");
   }
@@ -1095,6 +1353,7 @@ const DATA = {
     
     gridCP.innerHTML = '';
     gridSC.innerHTML = '';
+    gridCMD.innerHTML = '';
     gridDG.innerHTML = '';
 
     const filteredCP = DATA["کنترل پنل"].filter(item => 
@@ -1110,6 +1369,13 @@ const DATA = {
       item.keys.some(k => k.toLowerCase().includes(term))
     );
 
+    const filteredCMD = DATA["دستورات CMD"].filter(item => 
+      item.name.toLowerCase().includes(term) || 
+      item.cmd.toLowerCase().includes(term) || 
+      item.desc.toLowerCase().includes(term) ||
+      (item.tag && item.tag.toLowerCase().includes(term))
+    );
+
     const filteredDG = DATA["کدهای خطرناک"].filter(item => 
       item.name.toLowerCase().includes(term) || 
       item.cmd.toLowerCase().includes(term) || 
@@ -1120,6 +1386,7 @@ const DATA = {
 
     countCP.textContent = filteredCP.length;
     countSC.textContent = filteredSC.length;
+    countCMD.textContent = filteredCMD.length;
     countDG.textContent = filteredDG.length;
 
     if (filteredCP.length === 0) {
@@ -1132,6 +1399,12 @@ const DATA = {
       gridSC.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
     } else {
       filteredSC.forEach(item => gridSC.appendChild(createShortcutCard(item)));
+    }
+
+    if (filteredCMD.length === 0) {
+      gridCMD.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
+    } else {
+      filteredCMD.forEach(item => gridCMD.appendChild(createCmdCard(item, false)));
     }
 
     if (filteredDG.length === 0) {
