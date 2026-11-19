@@ -692,6 +692,8 @@ kbd {
     <div class="tabs">
       <button class="tab-btn active" data-tab="control-panel">⚙️ کنترل پنل <span class="tab-count" id="count-cp">0</span></button>
       <button class="tab-btn" data-tab="shortcuts">⌨️ میان‌برهای عمومی <span class="tab-count" id="count-sc">0</span></button>
+      <button class="tab-btn" data-tab="word-shortcuts">📝 میان‌برهای ورد <span class="tab-count" id="count-word">0</span></button>
+      <button class="tab-btn" data-tab="interactive-keys">🎛️ کنترل‌های تعاملی کیبورد <span class="tab-count" id="count-int">0</span></button>
       <button class="tab-btn" data-tab="cmd-commands">📟 دستورات CMD <span class="tab-count" id="count-cmd">0</span></button>
       <button class="tab-btn danger-tab" data-tab="dangerous">☠️ کدهای خطرناک <span class="tab-count" id="count-dg">0</span></button>
     </div>
@@ -702,6 +704,14 @@ kbd {
     
     <div id="shortcuts" class="tab-content">
       <div class="card-grid" id="grid-sc"></div>
+    </div>
+    
+    <div id="word-shortcuts" class="tab-content">
+      <div class="card-grid" id="grid-word"></div>
+    </div>
+    
+    <div id="interactive-keys" class="tab-content">
+      <div class="card-grid" id="grid-int"></div>
     </div>
     
     <div id="cmd-commands" class="tab-content">
@@ -854,6 +864,121 @@ const DATA = {
     { name: "باز کردن جستجوی فیدبک", keys: ["Win", "F"], desc: "باز کردن Feedback Hub" },
     { name: "باز کردن Windows Ink", keys: ["Win", "O"], desc: "قفل کردن جهت صفحه نمایش" }
   ],
+  "میان‌برهای ورد": [
+    { name: "سند جدید", keys: ["Ctrl", "N"], desc: "ایجاد یک سند جدید در Word" },
+    { name: "باز کردن فایل", keys: ["Ctrl", "O"], desc: "باز کردن یک سند موجود" },
+    { name: "ذخیره", keys: ["Ctrl", "S"], desc: "ذخیره کردن سند جاری" },
+    { name: "ذخیره با نام جدید", keys: ["F12"], desc: "ذخیره سند با نام یا مسیر جدید" },
+    { name: "چاپ", keys: ["Ctrl", "P"], desc: "باز کردن پنجره چاپ" },
+    { name: "بستن سند", keys: ["Ctrl", "W"], desc: "بستن سند فعال" },
+    { name: "خروج از ورد", keys: ["Alt", "F4"], desc: "بستن برنامه Word" },
+    { name: "کپی", keys: ["Ctrl", "C"], desc: "کپی متن انتخاب شده" },
+    { name: "برش", keys: ["Ctrl", "X"], desc: "برش متن انتخاب شده" },
+    { name: "چسباندن", keys: ["Ctrl", "V"], desc: "چسباندن متن کپی یا برش شده" },
+    { name: "واگرد (Undo)", keys: ["Ctrl", "Z"], desc: "بازگرداندن آخرین عمل" },
+    { name: "ازنو (Redo)", keys: ["Ctrl", "Y"], desc: "تکرار آخرین عمل واگرد شده" },
+    { name: "انتخاب همه", keys: ["Ctrl", "A"], desc: "انتخاب تمام متن سند" },
+    { name: "جستجو", keys: ["Ctrl", "F"], desc: "باز کردن کادر جستجو در سند" },
+    { name: "جایگزینی", keys: ["Ctrl", "H"], desc: "باز کردن کادر جستجو و جایگزینی" },
+    { name: "غلط‌یاب", keys: ["F7"], desc: "بررسی املا و دستور زبان" },
+    { name: "پررنگ (Bold)", keys: ["Ctrl", "B"], desc: "اعمال سبک پررنگ به متن" },
+    { name: "کج (Italic)", keys: ["Ctrl", "I"], desc: "اعمال سبک کج به متن" },
+    { name: "زیرخط (Underline)", keys: ["Ctrl", "U"], desc: "اعمال زیرخط به متن" },
+    { name: "بزرگ‌تر کردن فونت", keys: ["Ctrl", "]"], desc: "افزایش اندازه قلم" },
+    { name: "کوچک‌تر کردن فونت", keys: ["Ctrl", "["], desc: "کاهش اندازه قلم" },
+    { name: "تغییر حروف بزرگ/کوچک", keys: ["Shift", "F3"], desc: "تغییر حالت حروف بین بزرگ و کوچک" },
+    { name: "پاک کردن قالب‌بندی", keys: ["Ctrl", "Space"], desc: "حذف قالب‌بندی متن و بازگشت به حالت پیش‌فرض" },
+    { name: "وسط‌چین", keys: ["Ctrl", "E"], desc: "تراز کردن متن در وسط صفحه" },
+    { name: "چپ‌چین", keys: ["Ctrl", "L"], desc: "تراز کردن متن به سمت چپ" },
+    { name: "راست‌چین", keys: ["Ctrl", "R"], desc: "تراز کردن متن به سمت راست" },
+    { name: "هم‌تراز (Justify)", keys: ["Ctrl", "J"], desc: "تراز کردن متن به صورت دوطرفه" },
+    { name: "افزایش تورفتگی", keys: ["Ctrl", "M"], desc: "افزایش تورفتگی پاراگراف" },
+    { name: "کاهش تورفتگی", keys: ["Ctrl", "Shift", "M"], desc: "کاهش تورفتگی پاراگراف" },
+    { name: "حرکت نشانگر کلمه‌به‌کلمه", keys: ["Ctrl", "←/→"], desc: "جابه‌جایی نشانگر بین کلمات" },
+    { name: "حرکت به ابتدا/انتهای خط", keys: ["Home/End"], desc: "رفتن به ابتدا یا انتهای خط جاری" },
+    { name: "حرکت به ابتدا/انتهای سند", keys: ["Ctrl", "Home/End"], desc: "رفتن به ابتدا یا انتهای سند" },
+    { name: "انتخاب کلمه", keys: ["Ctrl", "Shift", "←/→"], desc: "انتخاب کلمه به کلمه" },
+    { name: "انتخاب تا انتهای سند", keys: ["Ctrl", "Shift", "End"], desc: "انتخاب متن از موقعیت فعلی تا انتهای سند" },
+    { name: "انتخاب یک خط", keys: ["Shift", "Home/End"], desc: "انتخاب از ابتدا یا تا انتهای خط" },
+    { name: "حذف کلمه قبل", keys: ["Ctrl", "Backspace"], desc: "حذف کلمه قبل از نشانگر" },
+    { name: "درج شکست صفحه", keys: ["Ctrl", "Enter"], desc: "ایجاد شکست صفحه و رفتن به صفحه بعد" },
+    { name: "درج شکست خط", keys: ["Shift", "Enter"], desc: "ایجاد شکست خط بدون ایجاد پاراگراف جدید" },
+    { name: "درج تاریخ", keys: ["Alt", "Shift", "D"], desc: "درج تاریخ جاری در سند" },
+    { name: "درج زمان", keys: ["Alt", "Shift", "T"], desc: "درج زمان جاری در سند" },
+    { name: "رفتن به سلول بعدی جدول", keys: ["Tab"], desc: "حرکت به سلول بعدی در جدول" },
+    { name: "رفتن به سلول قبلی جدول", keys: ["Shift", "Tab"], desc: "حرکت به سلول قبلی در جدول" },
+    { name: "افزودن سطر جدید در جدول", keys: ["Tab"], desc: "افزودن سطر جدید در آخرین سلول جدول" },
+    { name: "حذف سطر/ستون جدول", keys: ["Ctrl", "-"], desc: "باز کردن منوی حذف سطر/ستون" },
+    { name: "فعال کردن زبانه Home", keys: ["Alt", "H"], desc: "رفتن به زبانه Home در نوار ابزار" },
+    { name: "فعال کردن زبانه Insert", keys: ["Alt", "N"], desc: "رفتن به زبانه Insert" },
+    { name: "فعال کردن زبانه Design", keys: ["Alt", "G"], desc: "رفتن به زبانه Design" },
+    { name: "فعال کردن زبانه Layout", keys: ["Alt", "P"], desc: "رفتن به زبانه Layout" },
+    { name: "فعال کردن زبانه Review", keys: ["Alt", "R"], desc: "رفتن به زبانه Review" },
+    { name: "فعال کردن زبانه View", keys: ["Alt", "W"], desc: "رفتن به زبانه View" }
+  ],
+  "کنترل‌های تعاملی کیبورد": [
+    { name: "حرکت بین فیلدهای فرم", keys: ["Tab"], desc: "حرکت به فیلد بعدی در فرم‌ها و کادرهای متنی" },
+    { name: "حرکت به فیلد قبلی", keys: ["Shift", "Tab"], desc: "حرکت به فیلد قبلی در فرم‌ها" },
+    { name: "انتخاب گزینه", keys: ["Space"], desc: "انتخاب یا لغو انتخاب چک‌باکس و دکمه رادیویی" },
+    { name: "باز کردن منوی کشویی", keys: ["Alt", "↓"], desc: "باز کردن لیست کشویی و انتخاب گزینه" },
+    { name: "تأیید فرم", keys: ["Enter"], desc: "ارسال فرم یا تأیید کادر گفتگو" },
+    { name: "لغو فرم", keys: ["Esc"], desc: "بستن کادر گفتگو یا لغو عملیات" },
+    { name: "حرکت بین دکمه‌ها", keys: ["Tab"], desc: "حرکت بین دکمه‌های قابل کلیک" },
+    { name: "فعال کردن دکمه", keys: ["Space"], desc: "فعال کردن دکمه انتخاب شده" },
+    { name: "انتخاب متن با کیبورد", keys: ["Shift", "←/→"], desc: "انتخاب کاراکتر به کاراکتر" },
+    { name: "انتخاب سطر با کیبورد", keys: ["Shift", "↑/↓"], desc: "انتخاب سطر به سطر" },
+    { name: "انتخاب تا ابتدای سند", keys: ["Ctrl", "Shift", "Home"], desc: "انتخاب متن از موقعیت فعلی تا ابتدای سند" },
+    { name: "انتخاب تا انتهای سند", keys: ["Ctrl", "Shift", "End"], desc: "انتخاب متن از موقعیت فعلی تا انتهای سند" },
+    { name: "حرکت بین کلمات", keys: ["Ctrl", "←/→"], desc: "جابه‌جایی سریع بین کلمات" },
+    { name: "حرکت به ابتدا/انتهای خط", keys: ["Home/End"], desc: "رفتن به ابتدا یا انتهای خط" },
+    { name: "حرکت به ابتدا/انتهای سند", keys: ["Ctrl", "Home/End"], desc: "رفتن به ابتدا یا انتهای سند" },
+    { name: "حذف کاراکتر بعدی", keys: ["Delete"], desc: "حذف کاراکتر بعد از نشانگر" },
+    { name: "حذف کاراکتر قبلی", keys: ["Backspace"], desc: "حذف کاراکتر قبل از نشانگر" },
+    { name: "حذف کلمه بعدی", keys: ["Ctrl", "Delete"], desc: "حذف کلمه بعد از نشانگر" },
+    { name: "حذف کلمه قبلی", keys: ["Ctrl", "Backspace"], desc: "حذف کلمه قبل از نشانگر" },
+    { name: "کپی", keys: ["Ctrl", "C"], desc: "کپی متن انتخاب شده" },
+    { name: "برش", keys: ["Ctrl", "X"], desc: "برش متن انتخاب شده" },
+    { name: "چسباندن", keys: ["Ctrl", "V"], desc: "چسباندن متن کپی یا برش شده" },
+    { name: "واگرد", keys: ["Ctrl", "Z"], desc: "بازگرداندن آخرین عمل" },
+    { name: "ازنو", keys: ["Ctrl", "Y"], desc: "تکرار آخرین عمل واگرد شده" },
+    { name: "انتخاب همه", keys: ["Ctrl", "A"], desc: "انتخاب تمام محتوا" },
+    { name: "جستجو", keys: ["Ctrl", "F"], desc: "باز کردن کادر جستجو" },
+    { name: "ذخیره", keys: ["Ctrl", "S"], desc: "ذخیره کردن سند یا فایل" },
+    { name: "چاپ", keys: ["Ctrl", "P"], desc: "باز کردن پنجره چاپ" },
+    { name: "بستن پنجره", keys: ["Alt", "F4"], desc: "بستن پنجره فعال" },
+    { name: "تغییر پنجره", keys: ["Alt", "Tab"], desc: "جابجایی بین پنجره‌های باز" },
+    { name: "نمایش دسکتاپ", keys: ["Win", "D"], desc: "مینیمایز کردن همه پنجره‌ها" },
+    { name: "باز کردن Run", keys: ["Win", "R"], desc: "باز کردن پنجره Run" },
+    { name: "قفل سیستم", keys: ["Win", "L"], desc: "قفل کردن کامپیوتر" },
+    { name: "Task Manager", keys: ["Ctrl", "Shift", "Esc"], desc: "باز کردن مدیریت وظایف" },
+    { name: "منوی امنیتی", keys: ["Ctrl", "Alt", "Del"], desc: "نمایش صفحه گزینه‌های امنیتی" },
+    { name: "باز کردن منوی Start", keys: ["Win"], desc: "باز کردن منوی شروع" },
+    { name: "جستجوی ویندوز", keys: ["Win", "S"], desc: "باز کردن کادر جستجو" },
+    { name: "نمایش کلیپ‌بورد", keys: ["Win", "V"], desc: "باز کردن تاریخچه کلیپ‌بورد" },
+    { name: "انتخابگر Emoji", keys: ["Win", "."], desc: "باز کردن پنل ایموجی" },
+    { name: "چیدمان پنجره چپ", keys: ["Win", "←"], desc: "چسباندن پنجره به نیمه چپ" },
+    { name: "چیدمان پنجره راست", keys: ["Win", "→"], desc: "چسباندن پنجره به نیمه راست" },
+    { name: "چیدمان پنجره بالا", keys: ["Win", "↑"], desc: "چسباندن پنجره به نیمه بالا" },
+    { name: "چیدمان پنجره پایین", keys: ["Win", "↓"], desc: "چسباندن پنجره به نیمه پایین" },
+    { name: "تغییر دسکتاپ مجازی", keys: ["Win", "Ctrl", "→/←"], desc: "رفتن به دسکتاپ مجازی بعدی یا قبلی" },
+    { name: "ایجاد دسکتاپ مجازی", keys: ["Win", "Ctrl", "D"], desc: "ایجاد دسکتاپ مجازی جدید" },
+    { name: "بستن دسکتاپ مجازی", keys: ["Win", "Ctrl", "F4"], desc: "بستن دسکتاپ مجازی فعلی" },
+    { name: "نمایش Task View", keys: ["Win", "Tab"], desc: "نمایش تمام پنجره‌ها و دسکتاپ‌ها" },
+    { name: "گرفتن اسکرین‌شات", keys: ["Win", "Shift", "S"], desc: "ابزار برش تصویر" },
+    { name: "ذخیره اسکرین‌شات", keys: ["Win", "PrtScn"], desc: "ذخیره اسکرین‌شات در پوشه Pictures" },
+    { name: "باز کردن File Explorer", keys: ["Win", "E"], desc: "باز کردن پنجره فایل اکسپلورر" },
+    { name: "تنظیمات", keys: ["Win", "I"], desc: "باز کردن تنظیمات ویندوز" },
+    { name: "منوی مخفی Start", keys: ["Win", "X"], desc: "باز کردن منوی ابزارهای مدیریتی" },
+    { name: "مرکز اعلانات", keys: ["Win", "A"], desc: "باز کردن مرکز اعلانات" },
+    { name: "باز کردن Widgets", keys: ["Win", "W"], desc: "باز کردن پنل ابزارک‌ها" },
+    { name: "باز کردن Game Bar", keys: ["Win", "G"], desc: "باز کردن نوار بازی" },
+    { name: "متن‌خوان", keys: ["Win", "Ctrl", "Enter"], desc: "روشن کردن قابلیت متن‌خوان" },
+    { name: "پروژه / اتصال به نمایشگر", keys: ["Win", "P"], desc: "انتخاب حالت نمایشگر دوم" },
+    { name: "باز کردن اتصال‌ها", keys: ["Win", "K"], desc: "باز کردن سایدبار اتصال به دستگاه‌های بی‌سیم" },
+    { name: "باز کردن پنل اشتراک‌گذاری", keys: ["Win", "H"], desc: "باز کردن سایدبار اشتراک‌گذاری" },
+    { name: "باز کردن جستجوی فیدبک", keys: ["Win", "F"], desc: "باز کردن Feedback Hub" },
+    { name: "باز کردن Windows Ink", keys: ["Win", "O"], desc: "قفل کردن جهت صفحه نمایش" }
+  ],
   "دستورات CMD": [
     { name: "ASSOC", cmd: "assoc", desc: "نمایش یا تغییر ارتباط پسوند فایل‌ها", tag: "فایل" },
     { name: "ATTRIB", cmd: "attrib", desc: "نمایش یا تغییر ویژگی‌های فایل (مخفی، فقط خواندنی و...)", tag: "فایل" },
@@ -944,224 +1069,224 @@ const DATA = {
     {
       name: "پاک کردن کل درایو",
       cmd: "format C: /q",
-      desc: "فرمت سریع درایو C یا حذف اجباری تمام فایل‌های آن بدون هیچ هشداری. این دستور کل اطلاعات درایو ویندوز را از بین می‌برد [citation:5][citation:7].",
+      desc: "فرمت سریع درایو C یا حذف اجباری تمام فایل‌های آن بدون هیچ هشداری. این دستور کل اطلاعات درایو ویندوز را از بین می‌برد.",
       tag: "تخریب فایل",
       treatment: "اگر فقط درایو C پاک شده اما فایل‌های شخصی روی درایوهای دیگر دارید، باید ویندوز را دوباره نصب کنید. به یک فلش مموری حداقل ۸ گیگابایتی و یک کامپیوتر سالم دیگر نیاز دارید. با ابزار رسمی Media Creation Tool مایکروسافت، یک فلش بوت‌بل بسازید و از طریق آن ویندوز را نصب کنید."
     },
     {
       name: "حذف اجباری فایل‌های درایو",
       cmd: "del /f /s /q C:\\*.*",
-      desc: "حذف تمام فایل‌های درایو C به صورت بازگشتی (Recursive) و بدون هیچ پیام تأییدی. این دستور سکوت‌آمیز است و اجازه بازگشت نمی‌دهد [citation:5][citation:7].",
+      desc: "حذف تمام فایل‌های درایو C به صورت بازگشتی (Recursive) و بدون هیچ پیام تأییدی. این دستور سکوت‌آمیز است و اجازه بازگشت نمی‌دهد.",
       tag: "تخریب فایل",
       treatment: "اگر ویندوز بالا نمی‌آید، با فلش نصب ویندوز بوت کنید و از گزینه Repair your computer استفاده کنید. در Command Prompt دستور sfc /scannow را اجرا کنید. اگر فایل‌های سیستمی قابل بازیابی نبودند، نصب تازه ویندوز تنها گزینه است."
     },
     {
       name: "خراب کردن بوت (غیرفعال کردن Recovery)",
       cmd: "bcdedit /set {default} recoveryenabled No",
-      desc: "غیرفعال کردن قابلیت بازیابی ویندوز. پس از اجرای این دستور، در صورت خرابی ویندوز نمی‌توانید از حالت Recovery استفاده کنید [citation:4][citation:9].",
+      desc: "غیرفعال کردن قابلیت بازیابی ویندوز. پس از اجرای این دستور، در صورت خرابی ویندوز نمی‌توانید از حالت Recovery استفاده کنید.",
       tag: "خرابی بوت",
       treatment: "با یک فلش نصب ویندوز بوت کنید. در صفحه نصب، گزینه Repair your computer را انتخاب کنید و وارد Command Prompt شوید. دستور bcdedit /set {default} recoveryenabled Yes را اجرا کنید تا قابلیت بازیابی دوباره فعال شود."
     },
     {
       name: "نادیده گرفتن خطاهای بوت",
       cmd: "bcdedit /set {default} bootstatuspolicy ignoreallfailures",
-      desc: "مجبور کردن ویندوز به تلاش برای بوت در حالت عادی، حتی وقتی فایل‌های حیاتی خراب شده‌اند. این باعث می‌شود ویندوز به جای نمایش خطا، مستقیم کرش کند و به صفحه آبی مرگ بیفتد [citation:4][citation:12].",
+      desc: "مجبور کردن ویندوز به تلاش برای بوت در حالت عادی، حتی وقتی فایل‌های حیاتی خراب شده‌اند. این باعث می‌شود ویندوز به جای نمایش خطا، مستقیم کرش کند و به صفحه آبی مرگ بیفتد.",
       tag: "خرابی بوت",
       treatment: "با فلش نصب بوت کنید و وارد Command Prompt شوید. دستور bootrec /fixmbr و سپس bootrec /fixboot و bootrec /rebuildbcd را اجرا کنید. اگر مشکل حل نشد، دستور bcdedit /set {default} bootstatuspolicy DisplayAllFailures را اجرا کنید تا خطاها نمایش داده شوند."
     },
     {
       name: "از کار انداختن Taskbar و آیکون‌ها",
       cmd: "taskkill /f /im explorer.exe",
-      desc: "بستن ناگهانی فرآیند Windows Explorer که مسئول نوار وظیفه (Taskbar)، منوی استارت و آیکون‌های دسکتاپ است [citation:7].",
+      desc: "بستن ناگهانی فرآیند Windows Explorer که مسئول نوار وظیفه (Taskbar)، منوی استارت و آیکون‌های دسکتاپ است.",
       tag: "شیطنت",
       treatment: "کلیدهای Ctrl + Shift + Esc را بزنید تا Task Manager باز شود. از منوی File گزینه Run new task را انتخاب کنید، عبارت explorer.exe را تایپ کرده و Enter بزنید تا همه‌چیز به حالت عادی برگردد. اگر Task Manager باز نشد، سیستم را ریستارت کنید."
     },
     {
       name: "غیرفعال کردن موس و کیبورد",
       cmd: "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\Mouclass /f",
-      desc: "حذف کلید رجیستری مربوط به درایور موس که باعث از کار افتادن موس می‌شود. این کد برای شیطنت استفاده می‌شود [citation:7][citation:19].",
+      desc: "حذف کلید رجیستری مربوط به درایور موس که باعث از کار افتادن موس می‌شود. این کد برای شیطنت استفاده می‌شود.",
       tag: "شیطنت",
       treatment: "اگر موس از کار افتاد، با کیبورد (کلیدهای Tab، Enter و جهت‌نماها) به Device Manager بروید و از منوی Action گزینه Scan for hardware changes را انتخاب کنید. یا در Command Prompt دستور sfc /scannow را اجرا کنید."
     },
     {
       name: "پر کردن هارد و هنگ کردن سیستم (Fork Bomb)",
       cmd: "%0|%0",
-      desc: "این یک «بمب انشعاب» است که داخل یک فایل bat. نوشته می‌شود و به صورت بی‌نهایت خودش را بازتولید می‌کند و CPU و رم را به طور کامل اشغال می‌کند تا سیستم هنگ کند [citation:3][citation:8][citation:15].",
+      desc: "این یک «بمب انشعاب» است که داخل یک فایل bat. نوشته می‌شود و به صورت بی‌نهایت خودش را بازتولید می‌کند و CPU و رم را به طور کامل اشغال می‌کند تا سیستم هنگ کند.",
       tag: "هنگ کردن",
       treatment: "دکمه پاور را نگه دارید تا سیستم به صورت سخت‌افزاری خاموش شود. بعد از روشن کردن مجدد، اگر ویندوز بالا آمد، فایل bat. را پیدا کرده و پاک کنید. اگر ویندوز بالا نیامد، باید با فلش نصب بوت کرده و وارد محیط تعمیر (Repair) شوید تا ویندوز را بازیابی کنید."
     },
     {
       name: "حذف فایل‌های سیستمی با PowerShell",
       cmd: "Remove-Item -Path C:\\Windows\\System32\\* -Recurse -Force",
-      desc: "حذف کامل پوشه System32 که قلب ویندوز است و باعث می‌شود ویندوز دیگر قادر به کار کردن نباشد [citation:7].",
+      desc: "حذف کامل پوشه System32 که قلب ویندوز است و باعث می‌شود ویندوز دیگر قادر به کار کردن نباشد.",
       tag: "تخریب سیستم",
       treatment: "به یک فلش نصب ویندوز نیاز دارید. بهترین راه، اجرای یک Repair Install (نصب ترمیمی) است. فایل ISO ویندوز را از سایت مایکروسافت دانلود کرده و روی فلش رایت کنید. سپس فایل setup.exe را اجرا کنید و گزینه Keep personal files and apps را انتخاب کنید."
     },
     {
       name: "بمب انشعاب بی‌نهایت (Endless Loop)",
       cmd: ":loop\\nstart cmd.exe\\ngoto loop",
-      desc: "باز کردن بی‌نهایت پنجره خط فرمان (Command Prompt) تا زمانی که حافظه رم پر شود و سیستم هنگ کند [citation:7][citation:13].",
+      desc: "باز کردن بی‌نهایت پنجره خط فرمان (Command Prompt) تا زمانی که حافظه رم پر شود و سیستم هنگ کند.",
       tag: "هنگ کردن",
       treatment: "با فشردن Ctrl+Shift+Esc وارد Task Manager شوید و تمام فرآیندهای cmd.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را ۵ ثانیه نگه دارید تا سیستم خاموش شود."
     },
     {
       name: "باز کردن بی‌نهایت Notepad",
       cmd: "start notepad.exe\\ngoto loop",
-      desc: "باز کردن بی‌نهایت برنامه Notepad که باعث اشغال شدن منابع سیستم و هنگ کردن آن می‌شود [citation:19].",
+      desc: "باز کردن بی‌نهایت برنامه Notepad که باعث اشغال شدن منابع سیستم و هنگ کردن آن می‌شود.",
       tag: "هنگ کردن",
       treatment: "با Ctrl+Shift+Esc وارد Task Manager شوید و تمام فرآیندهای notepad.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را نگه دارید."
     },
     {
       name: "پر کردن هارد با فایل‌های خالی",
       cmd: "for /L %i in (1,1,1000000) do type nul > file%i.txt",
-      desc: "ایجاد تعداد بسیار زیادی فایل خالی در پوشه جاری که باعث پر شدن سریع فضای هارد دیسک می‌شود [citation:7].",
+      desc: "ایجاد تعداد بسیار زیادی فایل خالی در پوشه جاری که باعث پر شدن سریع فضای هارد دیسک می‌شود.",
       tag: "پر کردن هارد",
       treatment: "اگر ویندوز بالا می‌آید، به پوشه‌ای که فایل‌ها در آن ساخته شده‌اند بروید و همه را انتخاب و حذف کنید. اگر ویندوز بالا نمی‌آید، با فلش نصب بوت کنید و از Command Prompt دستور del /f /q *.txt را در مسیر مربوطه اجرا کنید."
     },
     {
       name: "غیرفعال کردن Task Manager",
       cmd: "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v DisableTaskMgr /t REG_DWORD /d 1 /f",
-      desc: "غیرفعال کردن برنامه Task Manager از طریق رجیستری تا کاربر نتواند فرآیندهای مخرب را ببندد [citation:7][citation:13].",
+      desc: "غیرفعال کردن برنامه Task Manager از طریق رجیستری تا کاربر نتواند فرآیندهای مخرب را ببندد.",
       tag: "محدودیت",
       treatment: "با استفاده از Run (کلید Win + R) عبارت regedit را تایپ کنید. به مسیر HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System بروید و مقدار DisableTaskMgr را حذف کنید یا به 0 تغییر دهید."
     },
     {
       name: "غیرفعال کردن خط فرمان (CMD)",
       cmd: "reg add HKCU\\Software\\Policies\\Microsoft\\Windows\\System /v DisableCMD /t REG_DWORD /d 1 /f",
-      desc: "غیرفعال کردن دسترسی به Command Prompt از طریق رجیستری [citation:7].",
+      desc: "غیرفعال کردن دسترسی به Command Prompt از طریق رجیستری.",
       tag: "محدودیت",
       treatment: "با استفاده از Run (Win + R) عبارت regedit را تایپ کنید. به مسیر HKCU\\Software\\Policies\\Microsoft\\Windows\\System بروید و مقدار DisableCMD را حذف کنید."
     },
     {
       name: "تغییر نام همه فایل‌های یک درایو",
       cmd: "ren *.doc *.txt\\nren *.jpg *.txt\\nren *.exe *.txt",
-      desc: "تغییر پسوند تمام فایل‌های یک دایرکتوری که باعث از کار افتادن برنامه‌ها و باز نشدن فایل‌ها می‌شود [citation:2][citation:19].",
+      desc: "تغییر پسوند تمام فایل‌های یک دایرکتوری که باعث از کار افتادن برنامه‌ها و باز نشدن فایل‌ها می‌شود.",
       tag: "تخریب فایل",
       treatment: "به صورت دستی یا با استفاده از نرم‌افزارهای بازیابی فایل، پسوند اصلی فایل‌ها را برگردانید. اگر تعداد فایل‌ها زیاد است، از دستور ren *.txt *.doc (برای هر نوع فایل به صورت جداگانه) استفاده کنید."
     },
     {
       name: "خراب کردن رجیستری (حذف کلیدهای عمومی)",
       cmd: "reg delete HKCR /f",
-      desc: "حذف کلیدهای اصلی رجیستری که باعث از کار افتادن انجمن فایل‌ها و برنامه‌ها می‌شود [citation:7][citation:11].",
+      desc: "حذف کلیدهای اصلی رجیستری که باعث از کار افتادن انجمن فایل‌ها و برنامه‌ها می‌شود.",
       tag: "تخریب سیستم",
       treatment: "اگر ویندوز بالا می‌آید، از System Restore (rstrui) استفاده کنید. اگر بالا نمی‌آید، با فلش نصب بوت کرده و Repair your computer را انتخاب کنید و سپس Startup Repair را اجرا کنید."
     },
     {
       name: "تغییر پسوند فایل‌ها به txt (Corrupt Files)",
       cmd: "ren *.exe *.txt",
-      desc: "تغییر پسوند تمام فایل‌های اجرایی به txt که باعث از کار افتادن برنامه‌ها می‌شود [citation:2][citation:19].",
+      desc: "تغییر پسوند تمام فایل‌های اجرایی به txt که باعث از کار افتادن برنامه‌ها می‌شود.",
       tag: "تخریب فایل",
       treatment: "با استفاده از Command Prompt در حالت ادمین، دستور ren *.txt *.exe را در مسیر مربوطه اجرا کنید. دقت کنید که فقط فایل‌های exe را برگردانید."
     },
     {
       name: "غیرفعال کردن فایروال ویندوز",
       cmd: "netsh firewall set opmode mode=disable",
-      desc: "غیرفعال کردن فایروال ویندوز که امنیت سیستم را به خطر می‌اندازد [citation:7][citation:11].",
+      desc: "غیرفعال کردن فایروال ویندوز که امنیت سیستم را به خطر می‌اندازد.",
       tag: "امنیت",
       treatment: "با استفاده از کنترل پنل (firewall.cpl) یا از طریق Command Prompt در حالت ادمین، دستور netsh firewall set opmode mode=enable را اجرا کنید."
     },
     {
       name: "غیرفعال کردن شبکه (Disable Internet)",
       cmd: "ipconfig /release_all",
-      desc: "آزاد کردن تمام آدرس‌های IP که باعث قطع شدن اتصال اینترنت می‌شود. این کد معمولاً در یک حلقه بی‌نهایت اجرا می‌شود [citation:2][citation:11].",
+      desc: "آزاد کردن تمام آدرس‌های IP که باعث قطع شدن اتصال اینترنت می‌شود. این کد معمولاً در یک حلقه بی‌نهایت اجرا می‌شود.",
       tag: "شبکه",
       treatment: "با استفاده از Command Prompt در حالت ادمین، دستور ipconfig /renew را اجرا کنید یا سیستم را ریستارت کنید."
     },
     {
       name: "حذف فایل‌های بوت (boot.ini)",
       cmd: "del C:\\boot.ini",
-      desc: "حذف فایل تنظیمات بوت در ویندوزهای قدیمی‌تر که باعث عدم بوت شدن سیستم می‌شود [citation:2].",
+      desc: "حذف فایل تنظیمات بوت در ویندوزهای قدیمی‌تر که باعث عدم بوت شدن سیستم می‌شود.",
       tag: "خرابی بوت",
       treatment: "با فلش نصب بوت کنید و وارد Recovery Console شوید. دستور bootcfg /rebuild را اجرا کنید تا فایل بوت بازسازی شود."
     },
     {
       name: "خاموش کردن سیستم با پیام",
       cmd: "shutdown -s -t 7 -c \"A VIRUS IS TAKING OVER\"",
-      desc: "خاموش کردن سیستم با تأخیر ۷ ثانیه و نمایش پیام جعلی ویروس برای ترساندن کاربر [citation:2].",
+      desc: "خاموش کردن سیستم با تأخیر ۷ ثانیه و نمایش پیام جعلی ویروس برای ترساندن کاربر.",
       tag: "شیطنت",
       treatment: "با دستور shutdown /a در Run (Win + R) عملیات خاموش شدن را لغو کنید."
     },
     {
       name: "ریستارت خودکار در هر بوت",
       cmd: "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v WindowsAPI /t REG_SZ /d C:\\windows\\hartell.bat /f",
-      desc: "افزودن یک برنامه به استارت‌آپ ویندوز که باعث ریستارت شدن سیستم در هر بار روشن شدن می‌شود [citation:2].",
+      desc: "افزودن یک برنامه به استارت‌آپ ویندوز که باعث ریستارت شدن سیستم در هر بار روشن شدن می‌شود.",
       tag: "خرابی بوت",
       treatment: "با فلش نصب بوت کنید یا از Safe Mode وارد شوید. با regedit مسیر HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run را باز کنید و مقدار WindowsAPI را حذف کنید."
     },
     {
       name: "خالی کردن سطل بازیافت با دستور",
       cmd: "rd /s /q C:\\$Recycle.Bin",
-      desc: "حذف پوشه سطل بازیافت که باعث پاک شدن دائمی فایل‌های حذف شده می‌شود [citation:5].",
+      desc: "حذف پوشه سطل بازیافت که باعث پاک شدن دائمی فایل‌های حذف شده می‌شود.",
       tag: "تخریب فایل",
       treatment: "این عمل قابل بازگشت نیست. سطل بازیافت به صورت خودکار توسط ویندوز بازسازی می‌شود، اما فایل‌های داخل آن از بین رفته‌اند."
     },
     {
       name: "بستن اجباری برنامه‌ها (Taskkill)",
       cmd: "taskkill /f /im notepad.exe /im calc.exe",
-      desc: "بستن اجباری برنامه‌های در حال اجرا بدون ذخیره اطلاعات که می‌تواند باعث از دست رفتن داده‌ها شود [citation:7].",
+      desc: "بستن اجباری برنامه‌های در حال اجرا بدون ذخیره اطلاعات که می‌تواند باعث از دست رفتن داده‌ها شود.",
       tag: "شیطنت",
       treatment: "هیچ راه درمانی برای اطلاعات ذخیره نشده وجود ندارد. برنامه‌ها را دوباره باز کنید و از این پس مرتب ذخیره کنید (Ctrl+S)."
     },
     {
       name: "تغییر تاریخ سیستم به تاریخ گذشته",
       cmd: "date 01/01/2000",
-      desc: "تغییر تاریخ سیستم به سال ۲۰۰۰ که می‌تواند باعث بروز مشکل در برنامه‌ها و گواهی‌های امنیتی شود [citation:7].",
+      desc: "تغییر تاریخ سیستم به سال ۲۰۰۰ که می‌تواند باعث بروز مشکل در برنامه‌ها و گواهی‌های امنیتی شود.",
       tag: "سیستم",
       treatment: "با دستور date در Command Prompt یا از طریق تنظیمات ویندوز (timedate.cpl) تاریخ صحیح را وارد کنید."
     },
     {
       name: "ایجاد حلقه بی‌نهایت باز کردن مرورگر",
       cmd: ":loop\\nstart msedge\\ngoto loop",
-      desc: "باز کردن بی‌نهایت مرورگر Edge که باعث اشغال کامل منابع سیستم می‌شود [citation:7].",
+      desc: "باز کردن بی‌نهایت مرورگر Edge که باعث اشغال کامل منابع سیستم می‌شود.",
       tag: "هنگ کردن",
       treatment: "با Ctrl+Shift+Esc وارد Task Manager شوید و تمام فرآیندهای msedge.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را نگه دارید."
     },
     {
       name: "غیرفعال کردن صدای سیستم",
       cmd: "net stop Audiosrv",
-      desc: "توقف سرویس صوتی ویندوز که باعث قطع شدن صدا می‌شود [citation:7].",
+      desc: "توقف سرویس صوتی ویندوز که باعث قطع شدن صدا می‌شود.",
       tag: "سیستم",
       treatment: "با Command Prompt در حالت ادمین، دستور net start Audiosrv را اجرا کنید یا سیستم را ریستارت کنید."
     },
     {
       name: "خالی کردن فایل hosts",
       cmd: "echo. > C:\\Windows\\System32\\drivers\\etc\\hosts",
-      desc: "خالی کردن فایل hosts که می‌تواند باعث بروز مشکل در دسترسی به برخی سایت‌ها شود [citation:7].",
+      desc: "خالی کردن فایل hosts که می‌تواند باعث بروز مشکل در دسترسی به برخی سایت‌ها شود.",
       tag: "شبکه",
       treatment: "فایل hosts را با Notepad باز کنید و محتوای پیش‌فرض آن را (که معمولاً با کامنت‌های توضیحی شروع می‌شود) بازگردانید یا از یک نسخه پشتیبان استفاده کنید."
     },
     {
       name: "مخفی کردن همه فایل‌ها",
       cmd: "attrib +h +s +r C:\\* /s /d",
-      desc: "مخفی و سیستمی کردن تمام فایل‌ها و پوشه‌ها که باعث می‌شود کاربر فکر کند فایل‌هایش ناپدید شده‌اند [citation:13].",
+      desc: "مخفی و سیستمی کردن تمام فایل‌ها و پوشه‌ها که باعث می‌شود کاربر فکر کند فایل‌هایش ناپدید شده‌اند.",
       tag: "شیطنت",
       treatment: "در Command Prompt دستور attrib -h -s -r C:\\* /s /d را اجرا کنید تا ویژگی‌های مخفی و سیستمی از فایل‌ها برداشته شود."
     },
     {
       name: "تغییر انجمن فایل txt به bat",
       cmd: "assoc .txt=batfile",
-      desc: "تغییر انجمن فایل‌های متنی به فایل‌های دسته‌ای که باعث اجرای کدهای مخرب با باز کردن فایل‌های txt می‌شود [citation:13].",
+      desc: "تغییر انجمن فایل‌های متنی به فایل‌های دسته‌ای که باعث اجرای کدهای مخرب با باز کردن فایل‌های txt می‌شود.",
       tag: "امنیت",
       treatment: "در Command Prompt دستور assoc .txt=txtfile را اجرا کنید تا انجمن فایل به حالت عادی برگردد."
     },
     {
       name: "خاموش کردن اجباری در زمان مشخص",
       cmd: "shutdown -s -t 0",
-      desc: "خاموش کردن فوری سیستم بدون هیچ هشداری که می‌تواند باعث از دست رفتن اطلاعات ذخیره نشده شود [citation:7].",
+      desc: "خاموش کردن فوری سیستم بدون هیچ هشداری که می‌تواند باعث از دست رفتن اطلاعات ذخیره نشده شود.",
       tag: "سیستم",
       treatment: "این عمل قابل لغو نیست مگر قبل از اجرای آن. همیشه قبل از کار با دستورات ناشناس، اطلاعات خود را ذخیره کنید."
     },
     {
       name: "حذف فایل autoexec.bat",
       cmd: "del C:\\autoexec.bat",
-      desc: "حذف فایل خودکار اجرا در ویندوزهای قدیمی که می‌تواند باعث بروز مشکل در بوت سیستم شود [citation:2].",
+      desc: "حذف فایل خودکار اجرا در ویندوزهای قدیمی که می‌تواند باعث بروز مشکل در بوت سیستم شود.",
       tag: "خرابی بوت",
       treatment: "این فایل در ویندوزهای مدرن استفاده نمی‌شود. اگر سیستم بوت نمی‌شود، با فلش نصب بوت کنید و Startup Repair را اجرا کنید."
     },
     {
       name: "ایجاد پیام بی‌نهایت",
       cmd: ":MESSAGE\\nmsg * \"YOUR SYSTEM IS CORRUPTED\"\\nGOTO MESSAGE",
-      desc: "نمایش بی‌نهایت پیام هشدار جعلی که باعث آزار کاربر و اشغال منابع می‌شود [citation:13].",
+      desc: "نمایش بی‌نهایت پیام هشدار جعلی که باعث آزار کاربر و اشغال منابع می‌شود.",
       tag: "شیطنت",
       treatment: "با Ctrl+Shift+Esc وارد Task Manager شوید و فرآیند msg.exe یا cmd.exe را ببندید. اگر سیستم پاسخ نمی‌دهد، دکمه پاور را نگه دارید."
     }
@@ -1183,10 +1308,14 @@ const DATA = {
   const tabContents = document.querySelectorAll('.tab-content');
   const gridCP = document.getElementById('grid-cp');
   const gridSC = document.getElementById('grid-sc');
+  const gridWord = document.getElementById('grid-word');
+  const gridInt = document.getElementById('grid-int');
   const gridCMD = document.getElementById('grid-cmd');
   const gridDG = document.getElementById('grid-dg');
   const countCP = document.getElementById('count-cp');
   const countSC = document.getElementById('count-sc');
+  const countWord = document.getElementById('count-word');
+  const countInt = document.getElementById('count-int');
   const countCMD = document.getElementById('count-cmd');
   const countDG = document.getElementById('count-dg');
   const toast = document.getElementById('toast');
@@ -1353,6 +1482,8 @@ const DATA = {
     
     gridCP.innerHTML = '';
     gridSC.innerHTML = '';
+    gridWord.innerHTML = '';
+    gridInt.innerHTML = '';
     gridCMD.innerHTML = '';
     gridDG.innerHTML = '';
 
@@ -1364,6 +1495,18 @@ const DATA = {
     );
 
     const filteredSC = DATA["میان‌برهای عمومی"].filter(item => 
+      item.name.toLowerCase().includes(term) || 
+      item.desc.toLowerCase().includes(term) ||
+      item.keys.some(k => k.toLowerCase().includes(term))
+    );
+
+    const filteredWord = DATA["میان‌برهای ورد"].filter(item => 
+      item.name.toLowerCase().includes(term) || 
+      item.desc.toLowerCase().includes(term) ||
+      item.keys.some(k => k.toLowerCase().includes(term))
+    );
+
+    const filteredInt = DATA["کنترل‌های تعاملی کیبورد"].filter(item => 
       item.name.toLowerCase().includes(term) || 
       item.desc.toLowerCase().includes(term) ||
       item.keys.some(k => k.toLowerCase().includes(term))
@@ -1386,6 +1529,8 @@ const DATA = {
 
     countCP.textContent = filteredCP.length;
     countSC.textContent = filteredSC.length;
+    countWord.textContent = filteredWord.length;
+    countInt.textContent = filteredInt.length;
     countCMD.textContent = filteredCMD.length;
     countDG.textContent = filteredDG.length;
 
@@ -1399,6 +1544,18 @@ const DATA = {
       gridSC.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
     } else {
       filteredSC.forEach(item => gridSC.appendChild(createShortcutCard(item)));
+    }
+
+    if (filteredWord.length === 0) {
+      gridWord.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
+    } else {
+      filteredWord.forEach(item => gridWord.appendChild(createShortcutCard(item)));
+    }
+
+    if (filteredInt.length === 0) {
+      gridInt.innerHTML = `<div class="empty-state">موردی یافت نشد.</div>`;
+    } else {
+      filteredInt.forEach(item => gridInt.appendChild(createShortcutCard(item)));
     }
 
     if (filteredCMD.length === 0) {
